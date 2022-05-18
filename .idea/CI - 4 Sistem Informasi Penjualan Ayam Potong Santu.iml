@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests/system" isTestSource="true" packagePrefix="CodeIgniter\" />
       <sourceFolder url="file://$MODULE_DIR$/utils" isTestSource="true" packagePrefix="Utils\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

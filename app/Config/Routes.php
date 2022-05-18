@@ -32,6 +32,9 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->group('admin', function ($routes) {
+    $routes->resource('products', ['controller' => 'Admin\ProductController']);
+});
 
 /*
  * --------------------------------------------------------------------
