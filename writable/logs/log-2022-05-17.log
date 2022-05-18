@@ -1,0 +1,12 @@
+CRITICAL - 2022-05-17 15:20:55 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 D:\Application\Project\PHP\Codeigniter\CI - 4 Sistem Informasi Penjualan Ayam Potong Santu\system\CodeIgniter.php(219): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 D:\Application\Project\PHP\Codeigniter\CI - 4 Sistem Informasi Penjualan Ayam Potong Santu\system\CodeIgniter.php(177): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 D:\Application\Project\PHP\Codeigniter\CI - 4 Sistem Informasi Penjualan Ayam Potong Santu\system\bootstrap.php(146): CodeIgniter\CodeIgniter->initialize()
+#3 D:\Application\Project\PHP\Codeigniter\CI - 4 Sistem Informasi Penjualan Ayam Potong Santu\spark(45): require('D:\\Application\\...')
+#4 {main}
+ERROR - 2022-05-17 08:29:32 --> Error connecting to the database: Access denied for user ''@'localhost' (using password: NO)
+ERROR - 2022-05-17 08:36:30 --> Table 'products' already exists
+ERROR - 2022-05-17 08:41:43 --> Unknown table 'ayam_potong_santu.carts'
+ERROR - 2022-05-17 09:02:19 --> Table 'users' already exists
+ERROR - 2022-05-17 09:02:19 --> Table 'products' already exists
+ERROR - 2022-05-17 09:02:19 --> Table 'carts' already exists
