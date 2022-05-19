@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li><a class="nav-link" href="blank.html"><i class="fa fa-shopping-bag"></i> <span>Produk</span></a></li>
+            <li><a class="nav-link" href="<?= route_to('admin.products.index'); ?>"><i class="fa fa-shopping-bag"></i> <span>Produk</span></a></li>
         </ul>
     </aside>
 </div>

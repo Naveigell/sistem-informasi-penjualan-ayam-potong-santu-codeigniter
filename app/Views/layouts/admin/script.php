@@ -6,6 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
 <link rel="stylesheet" href="<?= base_url('js/stisla.js'); ?>">
 <!-- JS Libraies -->
 
@@ -13,3 +14,17 @@
 <link rel="stylesheet" href="<?= base_url('js/scripts.js'); ?>">
 <link rel="stylesheet" href="<?= base_url('js/custom.js'); ?>">
 <link rel="stylesheet" href="<?= base_url('js/page/modules-datatables.js'); ?>">
+
+<script>
+    $(".nominal").inputmask({
+        alias : "currency",
+        groupSeparator: ".",
+        prefix: "",
+        placeholder: "",
+        allowPlus: false,
+        allowMinus: false,
+        rightAlign: false,
+        digits: 0,
+        removeMaskOnSubmit: true,
+    });
+</script>

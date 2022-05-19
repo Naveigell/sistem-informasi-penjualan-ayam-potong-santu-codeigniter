@@ -33,7 +33,11 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->group('admin', function ($routes) {
-    $routes->resource('products', ['controller' => 'Admin\ProductController']);
+    $routes->get('products', 'Admin\ProductController::index', ["as" => "admin.products.index"]);
+    $routes->post('products', 'Admin\ProductController::store', ["as" => "admin.products.store"]);
+    $routes->get('products/create', 'Admin\ProductController::create', ["as" => "admin.products.create"]);
+    $routes->get('products/(:num)/edit', 'Admin\ProductController::edit/$1', ["as" => "admin.products.edit"]);
+    $routes->put('products/(:num)', 'Admin\ProductController::update/$1', ["as" => "admin.products.update"]);
 });
 
 /*
