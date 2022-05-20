@@ -69,7 +69,7 @@ class ProductController extends BaseController
                 "slug" => str_slug($this->request->getVar('name')),
             ]));
         } catch (\ReflectionException $e) {
-            dd($e->getMessage());
+            var_dump($e->getMessage());
         }
 
         return redirect()->route('admin.products.index')->withInput()->with('success', 'Produk berhasil diubah');

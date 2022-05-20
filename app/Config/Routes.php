@@ -39,6 +39,13 @@ $routes->group('admin', function ($routes) {
     $routes->get('products/(:num)/edit', 'Admin\ProductController::edit/$1', ["as" => "admin.products.edit"]);
     $routes->put('products/(:num)', 'Admin\ProductController::update/$1', ["as" => "admin.products.update"]);
     $routes->delete('products/(:num)', 'Admin\ProductController::destroy/$1', ["as" => "admin.products.destroy"]);
+
+    $routes->get('shipping-costs', 'Admin\ShippingCostController::index', ["as" => "admin.shipping-costs.index"]);
+    $routes->post('shipping-costs', 'Admin\ShippingCostController::store', ["as" => "admin.shipping-costs.store"]);
+    $routes->get('shipping-costs/create', 'Admin\ShippingCostController::create', ["as" => "admin.shipping-costs.create"]);
+    $routes->get('shipping-costs/(:num)/edit', 'Admin\ShippingCostController::edit/$1', ["as" => "admin.shipping-costs.edit"]);
+    $routes->put('shipping-costs/(:num)', 'Admin\ShippingCostController::update/$1', ["as" => "admin.shipping-costs.update"]);
+    $routes->delete('shipping-costs/(:num)', 'Admin\ShippingCostController::destroy/$1', ["as" => "admin.shipping-costs.destroy"]);
 });
 
 /*
