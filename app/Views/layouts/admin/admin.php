@@ -49,7 +49,9 @@
 <?= $this->renderSection('content-script') ?>
 <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal" style="display: none;" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form class="modal-content" id="form-delete" method="post" action="">
+            <?= csrf_field(); ?>
+            <input type="hidden" name="_method" value="delete">
             <div class="modal-header">
                 <h5 class="modal-title">Hapus item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -61,14 +63,17 @@
             </div>
             <div class="modal-footer bg-whitesmoke br">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-danger">Hapus</button>
+                <button type="submit" class="btn btn-danger">Hapus</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <!-- Page Specific JS File -->
 <script>
     $(".data-table").dataTable();
+    $(".btn-delete").on('click', function () {
+        $('#form-delete').attr("action", $(this).data('url'));
+    })
 </script>
 </body>
 </html>

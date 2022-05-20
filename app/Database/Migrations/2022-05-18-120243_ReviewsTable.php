@@ -39,14 +39,14 @@ class ReviewsTable extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('user_id', 'users', 'id');
-        $this->forge->addForeignKey('product_id', 'products', 'id');
-        $this->forge->addForeignKey('shipping_id', 'shippings', 'id');
-        $this->forge->createTable('orders');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('product_id', 'products', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('shipping_id', 'shippings', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('reviews');
     }
 
     public function down()
     {
-        $this->forge->dropTable('orders');
+        $this->forge->dropTable('reviews');
     }
 }

@@ -46,7 +46,7 @@ class PaymentsTable extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('shipping_id', 'shippings', 'id');
+        $this->forge->addForeignKey('shipping_id', 'shippings', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('payments');
     }
 

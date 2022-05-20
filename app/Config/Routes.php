@@ -38,6 +38,7 @@ $routes->group('admin', function ($routes) {
     $routes->get('products/create', 'Admin\ProductController::create', ["as" => "admin.products.create"]);
     $routes->get('products/(:num)/edit', 'Admin\ProductController::edit/$1', ["as" => "admin.products.edit"]);
     $routes->put('products/(:num)', 'Admin\ProductController::update/$1', ["as" => "admin.products.update"]);
+    $routes->delete('products/(:num)', 'Admin\ProductController::destroy/$1', ["as" => "admin.products.destroy"]);
 });
 
 /*

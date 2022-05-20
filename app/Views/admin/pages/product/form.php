@@ -9,6 +9,9 @@
         <?php /** @var stdClass $product */ ?>
         <form action="<?= @$product ? route_to('admin.products.update', $product->id) : route_to('admin.products.store'); ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>
+            <?php if (@$product): ?>
+                <input type="hidden" name="_method" value="put">
+            <?php endif; ?>
             <div class="card-header">
                 <h4>Form Produk</h4>
             </div>

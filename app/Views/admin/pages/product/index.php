@@ -31,13 +31,13 @@ Produk
                     <tr>
                         <td><?= $product->name; ?></td>
                         <td>
-                            <img alt="image" src="<?= base_url('/uploads/images/products/'); ?>" class="rounded-circle" width="35">
+                            <img alt="image" src="<?= base_url('/uploads/images/products/' . $product->media); ?>" width="250" height="250">
                         </td>
-                        <td><?= $product->weight; ?></td>
-                        <td><?= format_price($product->price); ?></td>
+                        <td><?= format_number($product->weight, ''); ?>gr</td>
+                        <td><?= format_number($product->price); ?></td>
                         <td>
-                            <a href="<?= route_to('admin.products.edit', $product->id); ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
-                            <button data-target="#deleteModal" data-toggle="modal" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            <a href="<?= route_to('admin.products.edit', $product->product_id); ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
+                            <button data-target="#deleteModal" data-url="<?= route_to('admin.products.destroy', $product->product_id); ?>" data-toggle="modal" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
