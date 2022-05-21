@@ -34,6 +34,20 @@
                     <input name="name" type="text" class="form-control" value="<?= @$product ? $product->name : ''; ?>">
                 </div>
                 <div class="form-group">
+                    <label>Kategori Produk</label>
+                    <select class="form-control" name="category_id" id="">
+                        <option value="">Nothing selected</option>
+                        <?php /** @var array $categories */
+                        foreach ($categories as $category): ?>
+                            <option <?php if (@$product): ?>
+                                <?php if ($product->id == $category->id): ?>
+                                    selected
+                                <?php endif; ?>
+                            <?php endif; ?> value="<?= $category->id; ?>"><?= $category->name; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Berat Produk</label>
                     <div class="input-group">
                         <div class="input-group-prepend">

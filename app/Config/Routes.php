@@ -40,6 +40,13 @@ $routes->group('admin', function ($routes) {
     $routes->put('products/(:num)', 'Admin\ProductController::update/$1', ["as" => "admin.products.update"]);
     $routes->delete('products/(:num)', 'Admin\ProductController::destroy/$1', ["as" => "admin.products.destroy"]);
 
+    $routes->get('product_categories', 'Admin\ProductCategoryController::index', ["as" => "admin.product-categories.index"]);
+    $routes->post('product_categories', 'Admin\ProductCategoryController::store', ["as" => "admin.product-categories.store"]);
+    $routes->get('product_categories/create', 'Admin\ProductCategoryController::create', ["as" => "admin.product-categories.create"]);
+    $routes->get('product_categories/(:num)/edit', 'Admin\ProductCategoryController::edit/$1', ["as" => "admin.product-categories.edit"]);
+    $routes->put('product_categories/(:num)', 'Admin\ProductCategoryController::update/$1', ["as" => "admin.product-categories.update"]);
+    $routes->delete('product_categories/(:num)', 'Admin\ProductCategoryController::destroy/$1', ["as" => "admin.product-categories.destroy"]);
+
     $routes->get('shipping-costs', 'Admin\ShippingCostController::index', ["as" => "admin.shipping-costs.index"]);
     $routes->post('shipping-costs', 'Admin\ShippingCostController::store', ["as" => "admin.shipping-costs.store"]);
     $routes->get('shipping-costs/create', 'Admin\ShippingCostController::create', ["as" => "admin.shipping-costs.create"]);

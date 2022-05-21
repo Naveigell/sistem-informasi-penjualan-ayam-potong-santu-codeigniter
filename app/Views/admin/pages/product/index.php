@@ -20,6 +20,7 @@ Produk
                 <tr>
                     <th>Nama Produk</th>
                     <th>Foto Produk</th>
+                    <th>Kategori</th>
                     <th>Berat</th>
                     <th>Harga</th>
                     <th>Action</th>
@@ -32,6 +33,9 @@ Produk
                         <td><?= $product->name; ?></td>
                         <td>
                             <img alt="image" src="<?= base_url('/uploads/images/products/' . $product->media); ?>" width="250" height="250">
+                        </td>
+                        <td>
+                            <span class="badge badge-success"><?= $product->category_name; ?></span>
                         </td>
                         <td><?= format_number($product->weight, ''); ?>gr</td>
                         <td><?= format_number($product->price); ?></td>

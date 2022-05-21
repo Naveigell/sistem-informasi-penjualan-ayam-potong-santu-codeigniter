@@ -5,5 +5,5 @@
 <!-- CSS Libraries -->
 
 <!-- Template CSS -->
-<link rel="stylesheet" href="<?= base_url('css/style.css'); ?>">
-<link rel="stylesheet" href="<?= base_url('css/components.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('admin/css/style.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('admin/css/components.css'); ?>">

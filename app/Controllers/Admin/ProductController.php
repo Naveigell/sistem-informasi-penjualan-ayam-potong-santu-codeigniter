@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\ProductMedia;
 use CodeIgniter\Database\BaseConnection;
 
@@ -11,22 +12,26 @@ class ProductController extends BaseController
 {
     public function index()
     {
-        $products = (new Product())->withImages()->get()->getResultObject();
+        $products = (new Product())->withImages()->withCategory()->get()->getResultObject();
 
         return view('admin/pages/product/index', compact('products'));
     }
 
     public function edit($productId)
     {
-        $product = (object) (new Product())->find($productId);
+        $product    = (object) (new Product())->find($productId);
+        $categories = (new ProductCategory())->get()->getResultObject();
 
-        return view('admin/pages/product/form', compact('product'));
+        return view('admin/pages/product/form', compact('product', 'categories'));
     }
 
     public function update($productId)
     {
         $image = $this->request->getFile('image');
         $rules = [
+            'category_id' => [
+                'rules' => 'required',
+            ],
             'name' => [
                 'rules' => 'required',
             ],
@@ -77,13 +82,18 @@ class ProductController extends BaseController
 
     public function create()
     {
-        return view('admin/pages/product/form');
+        $categories = (new ProductCategory())->get()->getResultObject();
+
+        return view('admin/pages/product/form', compact('categories'));
     }
 
     public function store()
     {
         $validator = \Config\Services::validation();
         $validator->setRules([
+            'category_id' => [
+                'rules' => 'required',
+            ],
             'image' => [
                 'rules' => 'uploaded[image]|mime_in[image,image/png,image/jpg,image/jpeg]',
             ],

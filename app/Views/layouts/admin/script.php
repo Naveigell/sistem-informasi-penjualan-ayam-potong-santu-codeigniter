@@ -7,13 +7,13 @@
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
-<link rel="stylesheet" href="<?= base_url('js/stisla.js'); ?>">
+<link rel="stylesheet" href="<?= base_url('admin/js/stisla.js'); ?>">
 <!-- JS Libraies -->
 
 <!-- Template JS File -->
-<link rel="stylesheet" href="<?= base_url('js/scripts.js'); ?>">
-<link rel="stylesheet" href="<?= base_url('js/custom.js'); ?>">
-<link rel="stylesheet" href="<?= base_url('js/page/modules-datatables.js'); ?>">
+<link rel="stylesheet" href="<?= base_url('admin/js/scripts.js'); ?>">
+<link rel="stylesheet" href="<?= base_url('admin/js/custom.js'); ?>">
+<link rel="stylesheet" href="<?= base_url('admin/js/page/modules-datatables.js'); ?>">
 
 <script>
     $(".nominal").inputmask({

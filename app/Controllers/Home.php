@@ -2,15 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\Product;
+
 class Home extends BaseController
 {
     public function index()
     {
-        return view('admin/pages/dashboard/index');
-    }
+        $products = (new Product())->withImages()->get()->getResultObject();
 
-    public function test()
-    {
-        return "adsfasdf";
+        return view('home', compact('products'));
     }
 }

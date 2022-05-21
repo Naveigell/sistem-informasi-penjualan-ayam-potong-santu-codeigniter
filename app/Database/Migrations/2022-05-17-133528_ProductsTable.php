@@ -15,6 +15,11 @@ class ProductsTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
+            'category_id' => [
+                'type' => 'BIGINT',
+                'constraint' => 20,
+                'unsigned' => true,
+            ],
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -35,6 +40,7 @@ class ProductsTable extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('category_id', 'product_categories', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('products');
     }
 
