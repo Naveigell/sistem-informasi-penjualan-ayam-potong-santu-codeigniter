@@ -52,23 +52,26 @@
                 <p class="mb-4">
                     <?= $product->description; ?>
                 </p>
-                <div class="d-flex align-items-center mb-4 pt-2">
+                <form method="post" action="<?= route_to('member.carts.store', $product->id); ?>" class="d-flex align-items-center mb-4 pt-2">
+                    <?= csrf_field(); ?>
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus" >
+                            <button type="button" class="btn btn-primary btn-minus" >
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary text-center" value="1" min="1" max="<?= $product->stock; ?>">
+                        <input name="quantity" type="text" class="form-control bg-secondary text-center" value="1" min="1" max="<?= $product->stock; ?>">
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
+                            <button type="button" class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3" disabled><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
-                </div>
-                <span class="text text-danger">Login dahulu jika ingin menambahkan ke dalam keranjang!</span>
+                    <button class="btn btn-primary px-3" type="submit" <?= !session()->has('hasLoggedIn') ? 'disabled' : '' ?>><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                </form>
+                <?php if (!session()->has('hasLoggedIn')): ?>
+                    <span class="text text-danger">Login dahulu jika ingin menambahkan ke dalam keranjang!</span>
+                <?php endif; ?>
             </div>
         </div>
         <div class="row px-xl-5">

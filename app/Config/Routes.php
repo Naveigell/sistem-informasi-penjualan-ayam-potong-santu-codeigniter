@@ -54,9 +54,19 @@ $routes->group('admin', function ($routes) {
     $routes->delete('shipping-costs/(:num)', 'Admin\ShippingCostController::destroy/$1', ["as" => "admin.shipping-costs.destroy"]);
 });
 
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index', ["as" => "home"]);
 $routes->get('/login', 'Auth\MemberAuthController::login', ["as" => "member.auth.login.index"]);
 $routes->post('/login', 'Auth\MemberAuthController::doLogin', ["as" => "member.auth.login.store"]);
+$routes->get('/register', 'Auth\MemberAuthController::register', ["as" => "member.auth.register.index"]);
+$routes->post('/register', 'Auth\MemberAuthController::doRegister', ["as" => "member.auth.register.store"]);
+$routes->get('/logout', 'Auth\AuthController::logout', ["as" => "logout"]);
+
+$routes->group('member', function ($routes) {
+    $routes->get('carts', 'Member\CartController::index', ["as" => "member.carts.index"]);
+    $routes->delete('carts/(:num)', 'Member\CartController::destroy/$1', ["as" => "member.carts.destroy"]);
+});
+
+$routes->post('/carts/(:num)', 'Member\CartController::store/$1', ["as" => "member.carts.store"]);
 $routes->get('/(:any)/(:any)', 'Home::detail/$1/$2', ["as" => "member.home.detail"]);
 $routes->get('/(:any)', 'Home::category/$1', ["as" => "member.home.categories"]);
 

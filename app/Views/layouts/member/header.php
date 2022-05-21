@@ -1,3 +1,10 @@
+<?php
+    $totalCarts = 0;
+
+    if (session()->has('hasLoggedIn')) {
+        $totalCarts = (new \App\Models\Cart())->where('user_id', session()->get('user')->id)->countAll();
+    }
+?>
 
 <!-- Topbar Start -->
 <div class="container-fluid">
@@ -12,30 +19,36 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for products">
                     <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
+                        <span class="input-group-text bg-transparent text-primary">
+                            <i class="fa fa-search"></i>
+                        </span>
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-lg-3 col-6 text-right">
-            <a href="" class="btn border">
-                <i class="fas fa-heart text-primary"></i>
-                <span class="badge">0</span>
-            </a>
-            <a href="" class="btn border">
+            <a href="<?= route_to('member.carts.index'); ?>" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
+                <span class="badge"><?= $totalCarts; ?></span>
             </a>
-            <a href="" class="btn border">
-                <i class="fa fa-sign-in-alt text-primary"></i>
-                <span class="badge">Login</span>
-            </a>
-            <a href="" class="btn border">
-                <i class="fa fa-door-open text-primary"></i>
-                <span class="badge">Register</span>
-            </a>
+            <?php if (session()->has('hasLoggedIn')): ?>
+                <a href="" class="btn border">
+                    <span class="badge"><?= session()->get('user')->email; ?></span>
+                </a>
+                <a href="<?= route_to('logout'); ?>" class="btn border">
+                    <i class="fa fa-sign-in-alt text-primary"></i>
+                    <span class="badge">Logout</span>
+                </a>
+            <?php else: ?>
+                <a href="<?= route_to('member.auth.login.index'); ?>" class="btn border">
+                    <i class="fa fa-sign-in-alt text-primary"></i>
+                    <span class="badge">Login</span>
+                </a>
+                <a href="<?= route_to('member.auth.register.index'); ?>" class="btn border">
+                    <i class="fa fa-door-open text-primary"></i>
+                    <span class="badge">Register</span>
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 </div>

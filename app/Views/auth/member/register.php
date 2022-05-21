@@ -3,7 +3,7 @@
 <?= $this->section('content-body') ?>
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Login</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Register</h1>
         </div>
     </div>
 
@@ -11,7 +11,6 @@
         <div class="row px-xl-5">
             <div class="col-lg-12 mb-5">
                 <div class="contact-form">
-
                     <?php if ($errors = session()->getFlashdata('errors')): ?>
                         <div class="alert-danger alert text-left">
                             <ul>
@@ -22,18 +21,32 @@
                         </div>
                     <?php endif; ?>
 
-                    <form action="<?= route_to('member.auth.login.store'); ?>" method="post">
+                    <?php if ($success = session()->getFlashdata('success')): ?>
+                        <div class="alert-success alert text-left">
+                            <?= $success; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form novalidate="novalidate" action="<?= route_to('member.auth.register.store'); ?>" method="post">
                         <?= csrf_field(); ?>
                         <div class="control-group">
-                            <input type="email" class="form-control" name="email" placeholder="Your Email" data-validation-required-message="Please enter your name" aria-invalid="false">
+                            <input type="text" class="form-control" name="name" placeholder="Your Name" aria-invalid="false">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="password" class="form-control" name="password" placeholder="Your Password" data-validation-required-message="Please enter your email">
+                            <input type="text" class="form-control" name="username" placeholder="Your Name" aria-invalid="false">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="email" class="form-control" name="email" placeholder="Your Email" aria-invalid="false">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="password" class="form-control" name="password" placeholder="Your Password">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
-                            <button class="btn btn-primary py-2 px-4" type="submit">Login</button>
+                            <button class="btn btn-primary py-2 px-4" type="submit">Register</button>
                         </div>
                     </form>
                 </div>
