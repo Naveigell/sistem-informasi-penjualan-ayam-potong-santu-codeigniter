@@ -1,6 +1,7 @@
 <?= $this->extend('layouts/member/member') ?>
 
 <?= $this->section('content-body') ?>
+<?php /** @var array $categories */ ?>
 <!-- Navbar Start -->
 <div class="container-fluid mb-5">
     <div class="row border-top px-xl-5">
@@ -11,23 +12,16 @@
             </a>
             <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                 <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
-                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                            <a href="" class="dropdown-item">Men's Dresses</a>
-                            <a href="" class="dropdown-item">Women's Dresses</a>
-                            <a href="" class="dropdown-item">Baby's Dresses</a>
+                    <?php foreach ($categories as $category): ?>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link" data-toggle="dropdown"><?= $category->name; ?> <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                <a href="" class="dropdown-item">Men's Dresses</a>
+                                <a href="" class="dropdown-item">Women's Dresses</a>
+                                <a href="" class="dropdown-item">Baby's Dresses</a>
+                            </div>
                         </div>
-                    </div>
-                    <a href="" class="nav-item nav-link">Shirts</a>
-                    <a href="" class="nav-item nav-link">Jeans</a>
-                    <a href="" class="nav-item nav-link">Swimwear</a>
-                    <a href="" class="nav-item nav-link">Sleepwear</a>
-                    <a href="" class="nav-item nav-link">Sportswear</a>
-                    <a href="" class="nav-item nav-link">Jumpsuits</a>
-                    <a href="" class="nav-item nav-link">Blazers</a>
-                    <a href="" class="nav-item nav-link">Jackets</a>
-                    <a href="" class="nav-item nav-link">Shoes</a>
+                    <?php endforeach; ?>
                 </div>
             </nav>
         </div>
@@ -66,7 +60,7 @@
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Ayam Potong Santu Adalah</h3>
                                 <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
                             </div>
                         </div>
@@ -76,7 +70,7 @@
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Berlokasi Di Gianyar</h3>
                                 <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
                             </div>
                         </div>
@@ -98,23 +92,19 @@
 </div>
 <!-- Navbar End -->
 
-<!-- Categories Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
-        <?php /** @var array $products */
-        foreach ($products as $product): ?>
+        <?php foreach ($categories as $category): ?>
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                    <p class="text-right">15 Products</p>
-                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
-                        <img class="img-fluid" src="<?= base_url('/uploads/images/products/' . $product->media); ?>" alt="">
+                    <a href="<?= route_to('member.home.categories', $category->slug); ?>" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src="<?= base_url('/uploads/images/product_categories/' . $category->image); ?>" alt="">
                     </a>
-                    <h5 class="font-weight-semi-bold m-0"><?= $product->name; ?></h5>
+                    <h5 class="font-weight-semi-bold m-0"><?= $category->name; ?></h5>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
 </div>
-<!-- Categories End -->
 
 <?= $this->endSection() ?>

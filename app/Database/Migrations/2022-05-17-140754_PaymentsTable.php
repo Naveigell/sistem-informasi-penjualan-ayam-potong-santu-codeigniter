@@ -52,6 +52,6 @@ class PaymentsTable extends Migration
 
     public function down()
     {
-        $this->forge->createTable('payments');
+        $this->forge->dropTable('payments');
     }
 }

@@ -41,6 +41,12 @@ class ProductController extends BaseController
             'price' => [
                 'rules' => 'required',
             ],
+            'description' => [
+                'rules' => 'required',
+            ],
+            'stock' => [
+                'rules' => 'required',
+            ],
         ];
 
         if ($image->isFile()) {
@@ -104,6 +110,12 @@ class ProductController extends BaseController
                 'rules' => 'required',
             ],
             'price' => [
+                'rules' => 'required',
+            ],
+            'description' => [
+                'rules' => 'required',
+            ],
+            'stock' => [
                 'rules' => 'required',
             ],
         ]);

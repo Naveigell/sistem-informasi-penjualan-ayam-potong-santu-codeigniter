@@ -28,6 +28,14 @@
                 <i class="fas fa-shopping-cart text-primary"></i>
                 <span class="badge">0</span>
             </a>
+            <a href="" class="btn border">
+                <i class="fa fa-sign-in-alt text-primary"></i>
+                <span class="badge">Login</span>
+            </a>
+            <a href="" class="btn border">
+                <i class="fa fa-door-open text-primary"></i>
+                <span class="badge">Register</span>
+            </a>
         </div>
     </div>
 </div>

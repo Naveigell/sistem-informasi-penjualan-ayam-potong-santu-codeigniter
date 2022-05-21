@@ -28,12 +28,20 @@ class ProductsTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'description' => [
+                'type' => 'TEXT',
+            ],
             'weight' => [
                 'type' => 'INT',
                 'constraint' => 100,
                 'unsigned' => true,
             ],
             'price' => [
+                'type' => 'INT',
+                'constraint' => 100,
+                'unsigned' => true,
+            ],
+            'stock' => [
                 'type' => 'INT',
                 'constraint' => 100,
                 'unsigned' => true,

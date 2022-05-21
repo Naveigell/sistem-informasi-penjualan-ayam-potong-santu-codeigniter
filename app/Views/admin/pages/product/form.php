@@ -4,6 +4,14 @@
     Produk
 <?= $this->endSection() ?>
 
+<?= $this->section('content-title') ?>
+<style>
+    .ck-editor__editable {
+        min-height: 300px;
+    }
+</style>
+<?= $this->endSection() ?>
+
 <?= $this->section('content-body') ?>
     <div class="card">
         <?php /** @var stdClass $product */ ?>
@@ -69,10 +77,39 @@
                         <input name="price" type="text" class="form-control nominal" value="<?= @$product ? $product->price : ''; ?>">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>Stok</label>
+                    <input name="stock" type="text" class="form-control nominal" value="<?= @$product ? $product->stock : ''; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea name="description" class="form-control" id="editor" cols="30" rows="10"><?= @$product ? $product->description : ''; ?></textarea>
+                </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
     </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('content-script') ?>
+<script src="<?= base_url('/vendor/ckeditor5/build/ckeditor.js'); ?>"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ), {
+            height: 400,
+            // toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+            // heading: {
+            //     options: [
+            //         { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+            //         { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+            //         { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            //     ]
+            // }
+        } )
+        .catch( error => {
+            console.log( error );
+        } );
+</script>
 <?= $this->endSection() ?>

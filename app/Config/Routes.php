@@ -31,7 +31,6 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
 $routes->group('admin', function ($routes) {
     $routes->get('products', 'Admin\ProductController::index', ["as" => "admin.products.index"]);
     $routes->post('products', 'Admin\ProductController::store', ["as" => "admin.products.store"]);
@@ -54,6 +53,12 @@ $routes->group('admin', function ($routes) {
     $routes->put('shipping-costs/(:num)', 'Admin\ShippingCostController::update/$1', ["as" => "admin.shipping-costs.update"]);
     $routes->delete('shipping-costs/(:num)', 'Admin\ShippingCostController::destroy/$1', ["as" => "admin.shipping-costs.destroy"]);
 });
+
+$routes->get('/', 'Home::index');
+$routes->get('/login', 'Auth\MemberAuthController::login', ["as" => "member.auth.login.index"]);
+$routes->post('/login', 'Auth\MemberAuthController::doLogin', ["as" => "member.auth.login.store"]);
+$routes->get('/(:any)/(:any)', 'Home::detail/$1/$2', ["as" => "member.home.detail"]);
+$routes->get('/(:any)', 'Home::category/$1', ["as" => "member.home.categories"]);
 
 /*
  * --------------------------------------------------------------------

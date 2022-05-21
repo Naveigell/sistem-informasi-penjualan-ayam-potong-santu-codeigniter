@@ -8,8 +8,7 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $allowedFields = ['name', 'weight', 'price', 'slug', 'category_id'];
-
+    protected $allowedFields = ['name', 'weight', 'price', 'slug', 'category_id', 'stock', 'description'];
 
     public function withImages()
     {

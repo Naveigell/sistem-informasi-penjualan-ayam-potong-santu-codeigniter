@@ -23,6 +23,8 @@ Produk
                     <th>Kategori</th>
                     <th>Berat</th>
                     <th>Harga</th>
+                    <th>Stok</th>
+                    <th>Deskripsi</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -39,6 +41,8 @@ Produk
                         </td>
                         <td><?= format_number($product->weight, ''); ?>gr</td>
                         <td><?= format_number($product->price); ?></td>
+                        <td><?= $product->stock; ?></td>
+                        <td><?= $product->description; ?></td>
                         <td>
                             <a href="<?= route_to('admin.products.edit', $product->product_id); ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
                             <button data-target="#deleteModal" data-url="<?= route_to('admin.products.destroy', $product->product_id); ?>" data-toggle="modal" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
