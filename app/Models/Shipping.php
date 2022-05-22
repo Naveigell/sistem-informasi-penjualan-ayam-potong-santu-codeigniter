@@ -7,6 +7,7 @@ use CodeIgniter\Model;
 class Shipping extends Model
 {
     public const STATUS_ON_PROGRESS = 'on_progress';
+    public const STATUS_WAITING_PAYMENT = 'waiting_payment';
 
     protected $table = 'shippings';
 

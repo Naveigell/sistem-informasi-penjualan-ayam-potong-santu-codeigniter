@@ -10,7 +10,7 @@
 <div class="container-fluid">
     <div class="row align-items-center py-3 px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
-            <a href="" class="text-decoration-none">
+            <a href="<?= route_to('home'); ?>" class="text-decoration-none">
                 <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">EAyam</span>Santu</h1>
             </a>
         </div>
@@ -32,7 +32,7 @@
                 <span class="badge"><?= $totalCarts; ?></span>
             </a>
             <?php if (session()->has('hasLoggedIn')): ?>
-                <a href="" class="btn border">
+                <a href="<?= route_to('member.payments.index'); ?>" class="btn border">
                     <span class="badge"><?= session()->get('user')->email; ?></span>
                 </a>
                 <a href="<?= route_to('logout'); ?>" class="btn border">

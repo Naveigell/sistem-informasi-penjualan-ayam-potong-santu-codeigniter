@@ -72,9 +72,9 @@ class CheckoutController extends BaseController
             $shipping->insert(array_merge($this->request->getVar(), [
                 "user_id" => session()->get('user')->id,
                 "area_id" => $this->request->getVar('area_id'),
-                "status" => Shipping::STATUS_ON_PROGRESS,
-                "total" => $total,
-                "weight" => $weight,
+                "status"  => $this->request->getVar('payment_option') == 'cod' ? Shipping::STATUS_ON_PROGRESS : Shipping::STATUS_WAITING_PAYMENT,
+                "total"   => $total,
+                "weight"  => $weight,
             ]));
 
             $data = array_map(function ($cart) use ($shipping) {

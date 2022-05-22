@@ -64,8 +64,13 @@ $routes->get('/logout', 'Auth\AuthController::logout', ["as" => "logout"]);
 $routes->group('member', function ($routes) {
     $routes->get('carts', 'Member\CartController::index', ["as" => "member.carts.index"]);
     $routes->delete('carts/(:num)', 'Member\CartController::destroy/$1', ["as" => "member.carts.destroy"]);
+
     $routes->get('checkouts', 'Member\CheckoutController::index/$1', ["as" => "member.checkouts.index"]);
     $routes->post('checkouts', 'Member\CheckoutController::store/$1', ["as" => "member.checkouts.store"]);
+
+    $routes->get('payments', 'Member\PaymentController::index/$1', ["as" => "member.payments.index"]);
+    $routes->get('payments/(:num)', 'Member\PaymentController::edit/$1', ["as" => "member.payments.edit"]);
+    $routes->post('payments/(:num)', 'Member\PaymentController::store/$1', ["as" => "member.payments.store"]);
 });
 
 $routes->post('/carts/(:num)', 'Member\CartController::store/$1', ["as" => "member.carts.store"]);
