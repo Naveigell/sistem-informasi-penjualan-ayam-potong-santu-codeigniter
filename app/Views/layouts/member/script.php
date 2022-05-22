@@ -11,3 +11,8 @@
 
 <!-- Template Javascript -->
 <script src="<?= base_url('member/js/main.js'); ?>"></script>
+<script>
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+</script>

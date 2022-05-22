@@ -59,7 +59,7 @@
                         <h5 class="font-weight-bold">Total</h5>
                         <h5 class="font-weight-bold"><?= format_number($total); ?></h5>
                     </div>
-                    <button class="btn btn-block btn-primary my-3 py-3">Proses Pembelian</button>
+                    <a href="<?= route_to('member.checkouts.index'); ?>" class="btn btn-block btn-primary my-3 py-3">Proses Pembelian</a>
                 </div>
             </div>
         </div>

@@ -51,6 +51,10 @@ class ShippingsTable extends Migration
                 'constraint' => 10,
                 'unsigned' => true,
             ],
+            'payment_option' => [
+                'type' => 'VARCHAR',
+                'constraint' => 10,
+            ],
             'status' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,

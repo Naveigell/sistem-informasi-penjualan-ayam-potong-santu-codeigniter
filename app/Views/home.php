@@ -17,7 +17,9 @@
                             $products = (new \App\Models\Product())->where('category_id', $category->id)->get()->getResultObject();
                         ?>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown"><?= $category->name; ?> <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href="<?= route_to('member.home.categories', $category->slug); ?>" class="nav-link"><?= $category->name; ?>
+<!--                                <i class="fa fa-angle-down float-right mt-1"></i>-->
+                            </a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <?php foreach ($products as $product): ?>
                                     <a href="<?= route_to('member.home.detail', $category->slug, $product->slug); ?>" class="dropdown-item"><?= $product->name; ?></a>
