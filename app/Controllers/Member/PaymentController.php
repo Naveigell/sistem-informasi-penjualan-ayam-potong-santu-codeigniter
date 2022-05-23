@@ -54,6 +54,8 @@ class PaymentController extends BaseController
 
         $payment = new Payment();
         try {
+
+            $payment->deleteByShippingId($shippingId);
             $payment->insert(array_merge($this->request->getVar(), [
                 "proof" => $imageName,
                 "shipping_id" => $shippingId,

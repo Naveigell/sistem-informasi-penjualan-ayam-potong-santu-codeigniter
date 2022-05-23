@@ -28,17 +28,32 @@
                         <?php elseif (!$payment): ?>
                             <span class="badge badge-success">Sedang Di Proses</span>
                         <?php elseif ($payment['status'] == \App\Models\Payment::STATUS_WAITING): ?>
-                            <span class="badge badge-info">Menunggu Persetujuan</span>
+                            <span class="badge badge-info">Menunggu Persetujuan </span>
+                        <?php elseif ($payment['status'] == \App\Models\Payment::STATUS_INVALID): ?>
+                            <span class="badge badge-danger">Invalid</span>
                         <?php endif; ?>
                     </h6>
-                    <?php if ($shipping->status == \App\Models\Shipping::STATUS_ON_PROGRESS): ?>
-                        <div class="card-header-action text-right">
-                            <a href="" class="btn btn-info">Lihat</a>
-                        </div>
+
+                    <?php if ($payment): ?>
+                        <?php if($payment['status'] == \App\Models\Payment::STATUS_INVALID): ?>
+                            <div class="card-header-action text-right">
+                                <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
+                            </div>
+                        <?php elseif ($shipping->status == \App\Models\Shipping::STATUS_ON_PROGRESS): ?>
+                            <div class="card-header-action text-right">
+                                <a href="" class="btn btn-info">Lihat</a>
+                            </div>
+                        <?php endif; ?>
                     <?php else: ?>
-                        <div class="card-header-action text-right">
-                            <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
-                        </div>
+                        <?php if($shipping->payment_option == \App\Models\Payment::PAYMENT_COD): ?>
+                            <div class="card-header-action text-right">
+                                <a href="" class="btn btn-info">Lihat</a>
+                            </div>
+                        <?php else: ?>
+                            <div class="card-header-action text-right">
+                                <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
                 <div class="card-body">
