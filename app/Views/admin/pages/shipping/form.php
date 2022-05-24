@@ -99,7 +99,7 @@
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>
-                        <?php else: ?>
+                        <?php elseif (!($shipping->payment_option == \App\Models\Payment::PAYMENT_BANK_TRANSFER && !$shipping->proof)): ?>
                             <form action="<?= route_to('admin.shippings.status', $shipping->id); ?>" method="post">
                                 <?php if ($errors = session()->getFlashdata('errors')): ?>
                                     <div class="alert-danger alert">

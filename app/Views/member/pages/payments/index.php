@@ -41,15 +41,29 @@
                                 <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
                             </div>
                         <?php elseif ($shipping->status == \App\Models\Shipping::STATUS_ON_PROGRESS): ?>
-                            <div class="card-header-action text-right">
-                                <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
-                            </div>
+                            <?php if($shipping->finished): ?>
+                                <div class="card-header-action text-right">
+                                    <button class="btn btn-success">Pesanan Selesai</button>
+                                </div>
+                            <?php else: ?>
+                                <div class="card-header-action text-right">
+                                    <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
+                                    <button data-url="<?= route_to('member.shippings.finish', $shipping->id); ?>" data-target="#finishModal" data-toggle="modal" class="btn btn-success btn-finish">Selesaikan Pesanan</button>
+                                </div>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php else: ?>
                         <?php if($shipping->payment_option == \App\Models\Payment::PAYMENT_COD): ?>
-                            <div class="card-header-action text-right">
-                                <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
-                            </div>
+                            <?php if($shipping->finished): ?>
+                                <div class="card-header-action text-right">
+                                    <button class="btn btn-success">Pesanan Selesai</button>
+                                </div>
+                            <?php else: ?>
+                                <div class="card-header-action text-right">
+                                    <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
+                                    <button data-url="<?= route_to('member.shippings.finish', $shipping->id); ?>" data-target="#finishModal" data-toggle="modal" class="btn btn-success btn-finish">Selesaikan Pesanan</button>
+                                </div>
+                            <?php endif; ?>
                         <?php else: ?>
                             <div class="card-header-action text-right">
                                 <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
@@ -87,8 +101,34 @@
             </div>
         <?php endforeach; ?>
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="finishModal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form class="modal-content" id="form-finish" method="post" action="">
+                <?= csrf_field(); ?>
+                <input type="hidden" name="_method" value="put">
+                <div class="modal-header">
+                    <h5 class="modal-title">Selesaikan pesanan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Yakin ingin selesaikan pesanan?</p>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-success">Ya</button>
+                </div>
+            </form>
+        </div>
+    </div>
 <?= $this->endSection() ?>
 
 <?= $this->section('content-script') ?>
-
+    <script>
+        $(".btn-finish").on('click', function () {
+            $('#form-finish').attr("action", $(this).data('url'));
+        })
+    </script>
 <?= $this->endSection() ?>

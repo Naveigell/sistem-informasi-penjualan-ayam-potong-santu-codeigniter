@@ -53,11 +53,16 @@ class ShippingsTable extends Migration
             ],
             'payment_option' => [
                 'type' => 'VARCHAR',
-                'constraint' => 10,
+                'constraint' => 50,
             ],
             'status' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
+            ],
+            'finished' => [
+                'type' => 'INT',
+                'constraint' => 2,
+                'unsigned' => true,
             ],
         ]);
         $this->forge->addKey('id', true);

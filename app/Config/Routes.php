@@ -82,6 +82,7 @@ $routes->group('member', function ($routes) {
     $routes->post('payments/(:num)', 'Member\PaymentController::store/$1', ["as" => "member.payments.store"]);
 
     $routes->get('shippings/(:num)/timeline', 'Member\ShippingController::timeline/$1', ["as" => "member.shippings.timeline"]);
+    $routes->put('shippings/(:num)/finish', 'Member\ShippingController::finish/$1', ["as" => "member.shippings.finish"]);
 });
 
 $routes->post('/carts/(:num)', 'Member\CartController::store/$1', ["as" => "member.carts.store"]);
