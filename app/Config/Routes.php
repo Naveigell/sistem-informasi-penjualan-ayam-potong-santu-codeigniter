@@ -59,6 +59,8 @@ $routes->group('admin', function ($routes) {
     $routes->get('shippings/(:num)/edit', 'Admin\ShippingController::edit/$1', ["as" => "admin.shippings.edit"]);
     $routes->put('shippings/(:num)', 'Admin\ShippingController::update/$1', ["as" => "admin.shippings.update"]);
     $routes->delete('shippings/(:num)', 'Admin\ShippingController::destroy/$1', ["as" => "admin.shippings.destroy"]);
+
+    $routes->put('shippings/(:num)/status', 'Admin\ShippingController::status/$1', ["as" => "admin.shippings.status"]);
 });
 
 $routes->get('/', 'Home::index', ["as" => "home"]);
@@ -78,6 +80,8 @@ $routes->group('member', function ($routes) {
     $routes->get('payments', 'Member\PaymentController::index/$1', ["as" => "member.payments.index"]);
     $routes->get('payments/(:num)', 'Member\PaymentController::edit/$1', ["as" => "member.payments.edit"]);
     $routes->post('payments/(:num)', 'Member\PaymentController::store/$1', ["as" => "member.payments.store"]);
+
+    $routes->get('shippings/(:num)/timeline', 'Member\ShippingController::timeline/$1', ["as" => "member.shippings.timeline"]);
 });
 
 $routes->post('/carts/(:num)', 'Member\CartController::store/$1', ["as" => "member.carts.store"]);

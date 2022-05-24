@@ -58,7 +58,7 @@
                     <?php elseif ($shipping->payment_option == \App\Models\Payment::PAYMENT_BANK_TRANSFER && $shipping->payment_status == \App\Models\Payment::STATUS_VALID): ?>
                         <span class="badge badge-primary">Valid</span>
                     <?php elseif ($shipping->payment_option == \App\Models\Payment::PAYMENT_BANK_TRANSFER && $shipping->payment_status == \App\Models\Payment::STATUS_INVALID): ?>
-                        <span class="badge badge-primary">Invalid</span>
+                        <span class="badge badge-danger">Invalid</span>
                     <?php endif; ?>
                 </div>
                 <div class="row">
@@ -83,7 +83,7 @@
                             <label>Metode Pembayaran</label>
                             <input type="text" disabled value="<?= str_replace('_', ' ', $shipping->payment_option); ?>" class="form-control">
                         </div>
-                        <?php if ($shipping->payment_option == \App\Models\Payment::PAYMENT_BANK_TRANSFER && $shipping->proof && $shipping->status != \App\Models\Payment::STATUS_VALID): ?>
+                        <?php if ($shipping->payment_option == \App\Models\Payment::PAYMENT_BANK_TRANSFER && $shipping->proof && $shipping->payment_status != \App\Models\Payment::STATUS_VALID): ?>
                             <form class="form-group" method="post" action="<?= route_to('admin.shippings.update', $shipping->id); ?>">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="put">
@@ -94,6 +94,41 @@
                                     <option value="<?= \App\Models\Payment::STATUS_INVALID; ?>">invalid</option>
                                 </select>
                                 <br>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        <?php else: ?>
+                            <form action="<?= route_to('admin.shippings.status', $shipping->id); ?>" method="post">
+                                <?php if ($errors = session()->getFlashdata('errors')): ?>
+                                    <div class="alert-danger alert">
+                                        <ul>
+                                            <?php foreach ($errors as $error): ?>
+                                                <li><?= $error; ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?= csrf_field(); ?>
+                                <input type="hidden" name="_method" value="put">
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label>Tulis status</label>
+                                        <input type="text" class="form-control" name="status">
+                                        <input type="hidden" class="form-control" name="index">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>Auto fill status</label>
+                                        <select name="" id="auto-fill" class="form-control">
+                                            <option value="">-- Nothing Selected --</option>
+                                            <?php foreach(history_list() as $index => $history): ?>
+                                                <option value="<?= $index; ?>"><?= $history; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -132,4 +167,14 @@
             </div>
         </div>
     </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('content-script') ?>
+<script>
+    let autofill = $('#auto-fill');
+    autofill.on('change', function () {
+        $('input[name="status"]').val($(this).find(":selected").text());
+        $('input[name="index"]').val($(this).val());
+    });
+</script>
 <?= $this->endSection() ?>

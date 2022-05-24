@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Shipping;
+use App\Models\ShippingHistory;
 
 class ShippingController extends BaseController
 {
@@ -37,5 +38,28 @@ class ShippingController extends BaseController
         ]);
 
         return redirect()->route('admin.shippings.index')->withInput()->with('success', 'Validitas berhasil diubah');
+    }
+
+    public function status($shippingId)
+    {
+        $validator = \Config\Services::validation();
+        $validator->setRules([
+            'status' => [
+                'rules' => 'required',
+            ],
+        ]);
+
+        if (!$validator->run($this->request->getVar())) {
+            return redirect()->back()->withInput()->with('errors', $validator->getErrors());
+        }
+
+        (new ShippingHistory())->insert([
+            "shipping_id"   => $shippingId,
+            "description"   => $this->request->getVar('status'),
+            "index_id"      => $this->request->getVar('index') ? $this->request->getVar('index') : 0,
+            "progress_date" => date('Y-m-d H:i:s'),
+        ]);
+
+        return redirect()->route('admin.shippings.index')->withInput()->with('success', 'Berhasil mengubah status produk');
     }
 }

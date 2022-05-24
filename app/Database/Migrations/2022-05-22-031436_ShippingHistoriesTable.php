@@ -20,9 +20,16 @@ class ShippingHistoriesTable extends Migration
                 'constraint' => 20,
                 'unsigned' => true,
             ],
+            'index_id' => [
+                'type' => 'INT',
+                'constraint' => 3,
+            ],
             'description' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+            ],
+            'progress_date' => [
+                'type' => 'TIMESTAMP',
             ],
         ]);
         $this->forge->addKey('id', true);

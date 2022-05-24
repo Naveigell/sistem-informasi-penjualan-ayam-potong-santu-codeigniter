@@ -5,7 +5,7 @@
 
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Pembayaran</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Pembayaran Dan Pengiriman</h1>
         </div>
     </div>
 
@@ -17,20 +17,21 @@
                 $area     = (new \App\Models\ShippingCost())->where('id', $shipping->area_id)->first();
                 $payment  = (new \App\Models\Payment())->where('shipping_id', $shipping->id)->first();
                 $total    = 0;
+                $history  = (new \App\Models\ShippingHistory())->where('shipping_id', $shipping->id)->orderBy('id', 'desc')->first();
             ?>
 
             <div class="card mb-4">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h6>
-                        <i class="fa fa-truck"></i> Paket sedang diantar
+                        <i class="fa fa-truck"></i> <?= array_key_exists('description', is_array($history) ? $history : []) ? $history['description'] : 'Menunggu'; ?>
                         <?php if (!$payment && $shipping->payment_option == \App\Models\Payment::PAYMENT_BANK_TRANSFER): ?>
                             <span class="badge badge-danger">Belum Di Bayar</span>
                         <?php elseif (!$payment): ?>
-                            <span class="badge badge-success">Sedang Di Proses</span>
+<!--                            <span class="badge badge-success">Sedang Di Proses</span>-->
                         <?php elseif ($payment['status'] == \App\Models\Payment::STATUS_WAITING): ?>
                             <span class="badge badge-info">Menunggu Persetujuan </span>
                         <?php elseif ($payment['status'] == \App\Models\Payment::STATUS_INVALID): ?>
-                            <span class="badge badge-danger">Invalid</span>
+                            <span class="badge badge-danger">Pembayaran Invalid</span>
                         <?php endif; ?>
                     </h6>
 
@@ -41,13 +42,13 @@
                             </div>
                         <?php elseif ($shipping->status == \App\Models\Shipping::STATUS_ON_PROGRESS): ?>
                             <div class="card-header-action text-right">
-                                <a href="" class="btn btn-info">Lihat</a>
+                                <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
                             </div>
                         <?php endif; ?>
                     <?php else: ?>
                         <?php if($shipping->payment_option == \App\Models\Payment::PAYMENT_COD): ?>
                             <div class="card-header-action text-right">
-                                <a href="" class="btn btn-info">Lihat</a>
+                                <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
                             </div>
                         <?php else: ?>
                             <div class="card-header-action text-right">

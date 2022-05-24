@@ -23,6 +23,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="<?= base_url('member/css/style.css'); ?>" rel="stylesheet">
+    <?= $this->renderSection('content-style') ?>
 </head>
 
 <body>
