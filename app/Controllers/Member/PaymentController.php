@@ -10,7 +10,7 @@ class PaymentController extends BaseController
 {
     public function index()
     {
-        $shippings = (new Shipping())->where('user_id', session()->get('user')->id)->get()->getResultObject();
+        $shippings = (new Shipping())->where('user_id', session()->get('user')->id)->orderBy('id', 'desc')->get()->getResultObject();
 
         return view('member/pages/payments/index', compact('shippings'));
     }

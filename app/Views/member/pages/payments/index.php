@@ -44,6 +44,7 @@
                             <?php if($shipping->finished): ?>
                                 <div class="card-header-action text-right">
                                     <button class="btn btn-success">Pesanan Selesai</button>
+                                    <a href="<?= route_to('member.reviews.index', $shipping->id); ?>" class="btn btn-warning">Penilaian</a>
                                 </div>
                             <?php else: ?>
                                 <div class="card-header-action text-right">
@@ -57,6 +58,7 @@
                             <?php if($shipping->finished): ?>
                                 <div class="card-header-action text-right">
                                     <button class="btn btn-success">Pesanan Selesai</button>
+                                    <a href="<?= route_to('member.reviews.index', $shipping->id); ?>" class="btn btn-warning">Beri Penilaian</a>
                                 </div>
                             <?php else: ?>
                                 <div class="card-header-action text-right">

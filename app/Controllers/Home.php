@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Review;
 
 class Home extends BaseController
 {
@@ -25,7 +26,8 @@ class Home extends BaseController
     public function detail($categorySlug, $productSlug)
     {
         $product = (object) (new Product())->where('slug', $productSlug)->withImages()->first();
+        $reviews = (new Review())->where('product_id', $product->id)->withUser()->get()->getResultObject();
 
-        return view('detail', compact('product'));
+        return view('detail', compact('product', 'reviews'));
     }
 }
