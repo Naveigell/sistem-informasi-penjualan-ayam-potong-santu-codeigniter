@@ -59,7 +59,9 @@
                         <h5 class="font-weight-bold">Total</h5>
                         <h5 class="font-weight-bold"><?= format_number($total); ?></h5>
                     </div>
-                    <a href="<?= route_to('member.checkouts.index'); ?>" class="btn btn-block btn-primary my-3 py-3">Proses Pembelian</a>
+                    <?php if(count($carts) > 0): ?>
+                        <a href="<?= route_to('member.checkouts.index'); ?>" class="btn btn-block btn-primary my-3 py-3">Proses Pembelian</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

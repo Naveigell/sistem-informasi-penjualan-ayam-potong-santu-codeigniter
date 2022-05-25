@@ -13,7 +13,8 @@ class ShippingController extends BaseController
     public function finish($shippingId)
     {
         (new Shipping())->update($shippingId, [
-            "finished" => 1,
+            "finished"      => 1,
+            "finished_date" => date('Y-m-d H:i:s'),
         ]);
 
         $orders = (new Order())->where('shipping_id', $shippingId)->withProduct()->get()->getResultObject();

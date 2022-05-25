@@ -25,6 +25,10 @@ class ShippingsTable extends Migration
                 'constraint' => 20,
                 'unsigned' => true,
             ],
+            'order_id' => [
+                'type' => 'VARCHAR',
+                'constraint' => 30,
+            ],
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
@@ -63,6 +67,10 @@ class ShippingsTable extends Migration
                 'type' => 'INT',
                 'constraint' => 2,
                 'unsigned' => true,
+            ],
+            'finished_date' => [
+                'type' => 'TIMESTAMP',
+                'null' => true,
             ],
         ]);
         $this->forge->addKey('id', true);

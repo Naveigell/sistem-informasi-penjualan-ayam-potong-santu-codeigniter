@@ -11,7 +11,7 @@ class Shipping extends Model
 
     protected $table = 'shippings';
 
-    protected $allowedFields = ['user_id', 'area_id', 'name', 'email', 'address', 'phone', 'total', 'weight', 'payment_option', 'status', 'finished'];
+    protected $allowedFields = ['user_id', 'area_id', 'order_id', 'name', 'email', 'address', 'phone', 'total', 'weight', 'payment_option', 'status', 'finished', 'finished_date'];
 
     public function withUser()
     {

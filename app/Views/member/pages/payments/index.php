@@ -39,17 +39,20 @@
                         <?php if($payment['status'] == \App\Models\Payment::STATUS_INVALID): ?>
                             <div class="card-header-action text-right">
                                 <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
+                                <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
                             </div>
                         <?php elseif ($shipping->status == \App\Models\Shipping::STATUS_ON_PROGRESS): ?>
                             <?php if($shipping->finished): ?>
                                 <div class="card-header-action text-right">
                                     <button class="btn btn-success">Pesanan Selesai</button>
                                     <a href="<?= route_to('member.reviews.index', $shipping->id); ?>" class="btn btn-warning">Penilaian</a>
+                                    <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
                                 </div>
                             <?php else: ?>
                                 <div class="card-header-action text-right">
                                     <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
                                     <button data-url="<?= route_to('member.shippings.finish', $shipping->id); ?>" data-target="#finishModal" data-toggle="modal" class="btn btn-success btn-finish">Selesaikan Pesanan</button>
+                                    <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
                                 </div>
                             <?php endif; ?>
                         <?php endif; ?>
@@ -59,16 +62,19 @@
                                 <div class="card-header-action text-right">
                                     <button class="btn btn-success">Pesanan Selesai</button>
                                     <a href="<?= route_to('member.reviews.index', $shipping->id); ?>" class="btn btn-warning">Beri Penilaian</a>
+                                    <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
                                 </div>
                             <?php else: ?>
                                 <div class="card-header-action text-right">
                                     <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
                                     <button data-url="<?= route_to('member.shippings.finish', $shipping->id); ?>" data-target="#finishModal" data-toggle="modal" class="btn btn-success btn-finish">Selesaikan Pesanan</button>
+                                    <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
                                 </div>
                             <?php endif; ?>
                         <?php else: ?>
                             <div class="card-header-action text-right">
                                 <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
+                                <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -93,10 +99,13 @@
                         <?php $total += $product->price * $product->quantity; ?>
                     <?php endforeach; ?>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-9">
                             <p>Ongkos Kirim : <?= format_number($area['cost']); ?></p>
                             <p>Total : <?= format_number($total + $area['cost']); ?></p>
                             <p><span class="badge badge-primary" style="color: white;"><?= str_replace('_', ' ', $shipping->payment_option); ?></span></p>
+                        </div>
+                        <div class="col-3">
+                            <span>Order Id : <b><?= strtoupper($shipping->order_id); ?></b></span>
                         </div>
                     </div>
                 </div>

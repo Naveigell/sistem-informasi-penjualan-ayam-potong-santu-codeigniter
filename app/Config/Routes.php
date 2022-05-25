@@ -61,6 +61,8 @@ $routes->group('admin', function ($routes) {
     $routes->delete('shippings/(:num)', 'Admin\ShippingController::destroy/$1', ["as" => "admin.shippings.destroy"]);
 
     $routes->put('shippings/(:num)/status', 'Admin\ShippingController::status/$1', ["as" => "admin.shippings.status"]);
+
+    $routes->get('finances', 'Admin\FinanceController::index', ["as" => "admin.finances.index"]);
 });
 
 $routes->get('/', 'Home::index', ["as" => "home"]);
@@ -80,6 +82,7 @@ $routes->group('member', function ($routes) {
     $routes->get('payments', 'Member\PaymentController::index/$1', ["as" => "member.payments.index"]);
     $routes->get('payments/(:num)', 'Member\PaymentController::edit/$1', ["as" => "member.payments.edit"]);
     $routes->post('payments/(:num)', 'Member\PaymentController::store/$1', ["as" => "member.payments.store"]);
+    $routes->get('payments/(:num)/nota', 'Member\PaymentController::nota/$1', ["as" => "member.payments.nota"]);
 
     $routes->get('shippings/(:num)/timeline', 'Member\ShippingController::timeline/$1', ["as" => "member.shippings.timeline"]);
     $routes->put('shippings/(:num)/finish', 'Member\ShippingController::finish/$1', ["as" => "member.shippings.finish"]);

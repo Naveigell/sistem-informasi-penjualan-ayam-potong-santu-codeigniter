@@ -3,8 +3,11 @@
 namespace App\Controllers\Member;
 
 use App\Controllers\BaseController;
+use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Shipping;
+use App\Models\ShippingCost;
+use App\Models\User;
 
 class PaymentController extends BaseController
 {
@@ -70,5 +73,15 @@ class PaymentController extends BaseController
         }
 
         return redirect()->route('member.payments.index')->with('success', 'Barang berhasil di bayar');
+    }
+
+    public function nota($shippingId)
+    {
+        $orders   = (new Order())->withProduct()->where('shipping_id', $shippingId)->get()->getResultObject();
+        $shipping = (new Shipping())->where('id', $shippingId)->first();
+        $user     = (new User())->where('id', $shipping['user_id'])->first();
+        $area     = (new ShippingCost())->where('id', $shipping['area_id'])->first();
+
+        return view('member/pages/payments/nota', compact('orders', 'shipping', 'user', 'area'));
     }
 }

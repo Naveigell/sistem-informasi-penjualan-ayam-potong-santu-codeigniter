@@ -86,7 +86,7 @@
         <div class="row px-xl-5">
             <div class="col">
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
+<!--                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Review</a>-->
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-3">
