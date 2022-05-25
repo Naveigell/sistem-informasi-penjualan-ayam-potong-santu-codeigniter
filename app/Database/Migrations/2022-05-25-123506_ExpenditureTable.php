@@ -22,6 +22,10 @@ class ExpenditureTable extends Migration
             'publish_date' => [
                 'type' => 'TIMESTAMP',
             ],
+            'total' => [
+                'type' => 'INT',
+                'constraint' => 20,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('expenditures');

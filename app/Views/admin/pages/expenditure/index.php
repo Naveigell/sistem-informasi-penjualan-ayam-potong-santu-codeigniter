@@ -19,6 +19,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Tanggal</th>
+                        <th>Total</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -28,6 +29,7 @@
                         <tr>
                             <td><b><?= strtoupper($expenditure->rand_id); ?></b></td>
                             <td><?= date('d F Y', strtotime($expenditure->publish_date)) ?></td>
+                            <td><?= format_number($expenditure->total) ?></td>
                             <td>
                                 <a href="<?= route_to('admin.expenditures.edit', $expenditure->id); ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
                                 <button data-target="#deleteModal" data-url="<?= route_to('admin.expenditures.destroy', $expenditure->id); ?>" data-toggle="modal" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>

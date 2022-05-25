@@ -61,11 +61,11 @@ class CheckoutController extends BaseController
         }
 
         $total = array_reduce($data, function ($initial, $cart) {
-            return $initial + $cart['price'];
+            return $initial + $cart['price'] * $cart['quantity'];
         }, 0);
 
         $weight = array_reduce($data, function ($initial, $cart) {
-            return $initial + $cart['weight'];
+            return $initial + $cart['weight'] * $cart['quantity'];
         }, 0);
 
         try {

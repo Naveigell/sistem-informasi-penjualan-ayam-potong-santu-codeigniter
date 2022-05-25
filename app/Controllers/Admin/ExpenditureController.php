@@ -31,6 +31,10 @@ class ExpenditureController extends BaseController
     {
         $validator = $this->validator();
 
+        if (!$validator->run($this->request->getVar())) {
+            return redirect()->back()->withInput()->with('errors', $validator->getErrors());
+        }
+
         $quantities   = $this->request->getVar('quantity');
         $nominals     = $this->request->getVar('nominal');
         $descriptions = $this->request->getVar('description');
@@ -42,7 +46,8 @@ class ExpenditureController extends BaseController
 
         (new SubExpenditure())->where('expenditure_id', $expenditureId)->delete();
 
-        $data = [];
+        $data  = [];
+        $total = 0 ;
 
         foreach ($quantities as $index => $quantity) {
             $data[] = [
@@ -52,9 +57,15 @@ class ExpenditureController extends BaseController
                 "description"    => $descriptions[$index],
                 "expenditure_id" => $expenditureId,
             ];
+
+            $total += $quantity * $nominals[$index];
         }
 
         (new SubExpenditure())->insertBatch($data);
+        (new Expenditure())->update($expenditureId, [
+            'total' => $total,
+            "publish_date" => $this->request->getVar('publish_date'),
+        ]);
 
         return redirect()->route('admin.expenditures.index')->withInput()->with('success', 'Pengeluaran berhasil diubah');
     }
@@ -78,7 +89,8 @@ class ExpenditureController extends BaseController
             "rand_id"      => uniqid(),
         ]);
 
-        $data = [];
+        $data  = [];
+        $total = 0 ;
 
         foreach ($quantities as $index => $quantity) {
             $data[] = [
@@ -88,9 +100,14 @@ class ExpenditureController extends BaseController
                 "description"    => $descriptions[$index],
                 "expenditure_id" => $expenditure->getInsertID(),
             ];
+
+            $total += $quantity * $nominals[$index];
         }
 
         (new SubExpenditure())->insertBatch($data);
+        (new Expenditure())->update($expenditure->getInsertID(), [
+            'total' => $total,
+        ]);
 
         return redirect()->route('admin.expenditures.index')->withInput()->with('success', 'Pengeluaran berhasil ditambahkan');
     }

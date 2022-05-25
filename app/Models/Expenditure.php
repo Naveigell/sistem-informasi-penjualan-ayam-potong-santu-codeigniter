@@ -8,5 +8,5 @@ class Expenditure extends Model
 {
     protected $table = 'expenditures';
 
-    protected $allowedFields = ['rand_id', 'publish_date'];
+    protected $allowedFields = ['rand_id', 'publish_date', 'total'];
 }

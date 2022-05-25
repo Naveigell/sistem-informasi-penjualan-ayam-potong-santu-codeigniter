@@ -7,7 +7,7 @@
 <?= $this->section('content-body') ?>
     <div class="card">
         <?php /** @var stdClass $expenditure */ ?>
-        <form action="<?= @$expenditure ? route_to('admin.expenditures.update', 1) : route_to('admin.expenditures.store'); ?>" method="post" enctype="multipart/form-data">
+        <form action="<?= @$expenditure ? route_to('admin.expenditures.update', $expenditure->id) : route_to('admin.expenditures.store'); ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>
             <?php if (@$expenditure): ?>
                 <input type="hidden" name="_method" value="put">
