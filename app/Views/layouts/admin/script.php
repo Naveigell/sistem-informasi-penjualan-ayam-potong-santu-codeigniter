@@ -18,7 +18,7 @@
 <script>
     $(".nominal").inputmask({
         alias : "currency",
-        groupSeparator: ".",
+        groupSeparator: ",",
         prefix: "",
         placeholder: "",
         allowPlus: false,

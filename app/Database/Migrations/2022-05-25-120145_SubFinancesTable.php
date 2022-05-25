@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class FinancesTable extends Migration
+class SubFinancesTable extends Migration
 {
     public function up()
     {
@@ -15,24 +15,28 @@ class FinancesTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'rand_id' => [
-                'type' => 'VARCHAR',
+            'finance_id' => [
+                'type' => 'BIGINT',
                 'constraint' => 20,
+                'unsigned' => true,
             ],
-            'publish_date' => [
-                'type' => 'TIMESTAMP',
+            'value' => [
+                'type' => 'INT',
+                'constraint' => 20,
+                'unsigned' => true,
             ],
-            'finance_type' => [
+            'description' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
+                'constraint' => 255,
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('finances');
+        $this->forge->addForeignKey('finance_id', 'finances', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('sub_finances');
     }
 
     public function down()
     {
-        $this->forge->dropTable('finances');
+        $this->forge->dropTable('sub_finances');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class FinancesTable extends Migration
+class ExpenditureTable extends Migration
 {
     public function up()
     {
@@ -22,17 +22,13 @@ class FinancesTable extends Migration
             'publish_date' => [
                 'type' => 'TIMESTAMP',
             ],
-            'finance_type' => [
-                'type' => 'VARCHAR',
-                'constraint' => 100,
-            ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('finances');
+        $this->forge->createTable('expenditures');
     }
 
     public function down()
     {
-        $this->forge->dropTable('finances');
+        $this->forge->dropTable('expenditures');
     }
 }

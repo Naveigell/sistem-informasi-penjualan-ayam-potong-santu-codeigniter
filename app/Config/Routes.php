@@ -62,7 +62,12 @@ $routes->group('admin', function ($routes) {
 
     $routes->put('shippings/(:num)/status', 'Admin\ShippingController::status/$1', ["as" => "admin.shippings.status"]);
 
-    $routes->get('finances', 'Admin\FinanceController::index', ["as" => "admin.finances.index"]);
+    $routes->get('expenditures', 'Admin\ExpenditureController::index', ["as" => "admin.expenditures.index"]);
+    $routes->get('expenditures/create', 'Admin\ExpenditureController::create', ["as" => "admin.expenditures.create"]);
+    $routes->get('expenditures/(:num)/edit', 'Admin\ExpenditureController::edit/$1', ["as" => "admin.expenditures.edit"]);
+    $routes->post('expenditures', 'Admin\ExpenditureController::store', ["as" => "admin.expenditures.store"]);
+    $routes->put('expenditures/(:num)', 'Admin\ExpenditureController::update/$1', ["as" => "admin.expenditures.update"]);
+    $routes->delete('expenditures/(:num)', 'Admin\ExpenditureController::destroy/$1', ["as" => "admin.expenditures.destroy"]);
 });
 
 $routes->get('/', 'Home::index', ["as" => "home"]);

@@ -1,13 +1,13 @@
 <?= $this->extend('layouts/admin/admin') ?>
 
 <?= $this->section('content-title') ?>
-    Keuangan
+    Pengeluaran
 <?= $this->endSection() ?>
 
 <?= $this->section('content-body') ?>
     <div class="card">
         <div class="card-header">
-            <h4 class="d-inline">Keuangan</h4>
+            <h4 class="d-inline">Pengeluaran</h4>
             <div class="card-header-action">
                 <a href="<?= route_to('admin.expenditures.create'); ?>" class="btn btn-primary"><i class="fa fa-plus"></i> &nbsp; Tambah</a>
             </div>
@@ -23,14 +23,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php /** @var array $finances */
-                    foreach($finances as $finance): ?>
+                    <?php /** @var array $expenditures */
+                    foreach($expenditures as $expenditure): ?>
                         <tr>
-                            <td><?= $finance->rand_id; ?></td>
-                            <td><?= date('d F Y', strtotime($finance->publish_date)) ?></td>
+                            <td><b><?= strtoupper($expenditure->rand_id); ?></b></td>
+                            <td><?= date('d F Y', strtotime($expenditure->publish_date)) ?></td>
                             <td>
-                                <a href="<?= route_to('admin.expenditures.edit', $finance->id); ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
-                                <button data-target="#deleteModal" data-url="<?= route_to('admin.expenditures.destroy', $finance->id); ?>" data-toggle="modal" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
+                                <a href="<?= route_to('admin.expenditures.edit', $expenditure->id); ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
+                                <button data-target="#deleteModal" data-url="<?= route_to('admin.expenditures.destroy', $expenditure->id); ?>" data-toggle="modal" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
