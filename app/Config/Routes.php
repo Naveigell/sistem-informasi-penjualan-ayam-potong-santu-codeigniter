@@ -66,6 +66,8 @@ $routes->group('admin', function ($routes) {
 
     $routes->get('suggestions', 'Admin\SuggestionController::index', ["as" => "admin.suggestions.index"]);
 
+    $routes->get('dashboard', 'Admin\DashboardController::index', ["as" => "admin.dashboard.index"]);
+
     $routes->get('reports', 'Admin\ReportController::index', ["as" => "admin.reports.index"]);
     $routes->get('reports/print', 'Admin\ReportController::print', ["as" => "admin.reports.print"]);
 
