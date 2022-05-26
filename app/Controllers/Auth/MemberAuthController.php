@@ -28,7 +28,7 @@ class MemberAuthController extends BaseController
             return redirect()->route('member.auth.login.index')->withInput()->with('errors', $validator->getErrors());
         }
 
-        $user = (object) (new User())->where('email', $this->request->getVar('email'))->where('role', User::ROLE_USER)->first();
+        $user = (object) (new User())->where('email', $this->request->getVar('email'))->first();
         if (!$user) {
             $validator->setError('auth', 'User not found');
 
@@ -72,6 +72,14 @@ class MemberAuthController extends BaseController
 
         if (!$validator->run($this->request->getVar())) {
             return redirect()->back()->withInput()->with('errors', $validator->getErrors());
+        }
+
+        $user = (new User())->where('email', $this->request->getVar('email'))->first();
+
+        if ($user) {
+            $validator->setError('auth', 'User already exists');
+
+            return redirect()->route('member.auth.register.index')->withInput()->with('errors', $validator->getErrors());
         }
 
         try {

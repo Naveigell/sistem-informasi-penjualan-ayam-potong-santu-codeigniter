@@ -31,7 +31,11 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->group('admin', function ($routes) {
+$routes->get('/admin/login', 'Auth\AdminAuthController::index', ["as" => "admin.auth.login.index"]);
+$routes->post('/admin/login', 'Auth\AdminAuthController::store', ["as" => "admin.auth.login.store"]);
+
+$routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
+
     $routes->get('products', 'Admin\ProductController::index', ["as" => "admin.products.index"]);
     $routes->post('products', 'Admin\ProductController::store', ["as" => "admin.products.store"]);
     $routes->get('products/create', 'Admin\ProductController::create', ["as" => "admin.products.create"]);
