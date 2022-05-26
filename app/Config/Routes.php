@@ -64,6 +64,8 @@ $routes->group('admin', function ($routes) {
 
     $routes->get('incomes', 'Admin\IncomeController::index', ["as" => "admin.incomes.index"]);
 
+    $routes->get('suggestions', 'Admin\SuggestionController::index', ["as" => "admin.suggestions.index"]);
+
     $routes->get('reports', 'Admin\ReportController::index', ["as" => "admin.reports.index"]);
     $routes->get('reports/print', 'Admin\ReportController::print', ["as" => "admin.reports.print"]);
 
@@ -100,6 +102,9 @@ $routes->group('member', function ($routes) {
     $routes->get('reviews/(:num)', 'Member\ReviewController::index/$1', ["as" => "member.reviews.index"]);
     $routes->get('reviews/(:num)/product/(:num)', 'Member\ReviewController::edit/$1/$2', ["as" => "member.reviews.shipping.edit"]);
     $routes->post('reviews/(:num)/product/(:num)', 'Member\ReviewController::store/$1/$2', ["as" => "member.reviews.shipping.store"]);
+
+    $routes->get('suggestions', 'Member\SuggestionController::index', ["as" => "member.suggestions.index"]);
+    $routes->post('suggestions', 'Member\SuggestionController::store', ["as" => "member.suggestions.store"]);
 });
 
 $routes->post('/carts/(:num)', 'Member\CartController::store/$1', ["as" => "member.carts.store"]);

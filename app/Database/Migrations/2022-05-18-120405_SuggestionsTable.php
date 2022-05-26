@@ -23,6 +23,10 @@ class SuggestionsTable extends Migration
             'description' => [
                 'type' => 'TEXT',
             ],
+            'created_at' => [
+                'type' => 'TIMESTAMP',
+                'null' => true,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');

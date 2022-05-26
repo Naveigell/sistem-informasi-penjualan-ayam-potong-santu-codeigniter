@@ -15,6 +15,8 @@
             <li><a class="nav-link" href="<?= route_to('admin.shipping-costs.index'); ?>"><i class="fa fa-box"></i> <span>Area Pengiriman</span></a></li>
             <li class="menu-header">Pemesanan</li>
             <li><a class="nav-link" href="<?= route_to('admin.shippings.index'); ?>"><i class="fa fa-truck"></i> <span>Pengiriman</span></a></li>
+            <li class="menu-header">Saran</li>
+            <li><a class="nav-link" href="<?= route_to('admin.suggestions.index'); ?>"><i class="fa fa-envelope"></i> <span>Saran</span></a></li>
             <li class="menu-header">Keuangan</li>
             <li><a class="nav-link" href="<?= route_to('admin.expenditures.index'); ?>"><i class="fa fa-upload"></i> <span>Pengeluaran</span></a></li>
             <li><a class="nav-link" href="<?= route_to('admin.incomes.index'); ?>"><i class="fa fa-download"></i> <span>Pemasukan</span></a></li>

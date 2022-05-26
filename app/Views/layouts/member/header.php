@@ -17,23 +17,27 @@
         <div class="col-lg-6 col-6 text-left">
             <form action="">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
-                    <div class="input-group-append">
-                        <span class="input-group-text bg-transparent text-primary">
-                            <i class="fa fa-search"></i>
-                        </span>
-                    </div>
+<!--                    <input type="text" class="form-control" placeholder="Search for products">-->
+<!--                    <div class="input-group-append">-->
+<!--                        <span class="input-group-text bg-transparent text-primary">-->
+<!--                            <i class="fa fa-search"></i>-->
+<!--                        </span>-->
+<!--                    </div>-->
                 </div>
             </form>
         </div>
         <div class="col-lg-3 col-6 text-right">
-            <a href="<?= route_to('member.carts.index'); ?>" class="btn border">
+            <a href="<?= session()->has('hasLoggedIn') ? route_to('member.carts.index') : '#'; ?>" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
                 <span class="badge"><?= $totalCarts; ?></span>
             </a>
             <?php if (session()->has('hasLoggedIn')): ?>
                 <a href="<?= route_to('member.payments.index'); ?>" class="btn border">
                     <span class="badge"><?= session()->get('user')->email; ?></span>
+                </a>
+                <a href="<?= route_to('member.suggestions.index'); ?>" class="btn border">
+                    <i class="fas fa-envelope text-primary"></i>
+                    <span class="badge">Saran</span>
                 </a>
                 <a href="<?= route_to('logout'); ?>" class="btn border">
                     <i class="fa fa-sign-in-alt text-primary"></i>
