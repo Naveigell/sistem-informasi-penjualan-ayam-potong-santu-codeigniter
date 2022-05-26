@@ -19,21 +19,33 @@
     <?php /** @var stdClass $product */ ?>
     <?php /** @var array $reviews */ ?>
 
+    <?php
+        $medias = (new \App\Models\ProductMedia())->where('product_id', $product->id)->get()->getResultObject();
+    ?>
+
     <!-- Shop Detail Start -->
     <div class="container-fluid py-5">
         <div class="row px-xl-5">
             <div class="col-lg-5 pb-5">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
-                        <div class="carousel-item active">
-                            <video controls width="100%" height="100%" style="cursor: pointer;">
-                                <source src="<?= base_url('/test.mp4'); ?>" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="<?= base_url('/uploads/images/products/' . $product->media); ?>" alt="Image">
-                        </div>
+                        <?php foreach($medias as $index => $media): ?>
+                            <?php if($media->type == \App\Models\ProductMedia::TYPE_VIDEO): ?>
+
+                                <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?>">
+                                    <video controls width="100%" height="100%" style="cursor: pointer;">
+                                        <source src="<?= base_url('/uploads/videos/products/' . $media->media); ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+
+                            <?php else: ?>
+
+                                <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?>">
+                                    <img class="w-100 h-100" src="<?= base_url('/uploads/images/products/' . $media->media); ?>" alt="Image">
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                         <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -57,7 +69,8 @@
                     <small class="pt-1">(50 Reviews)</small>
                 </div>
                 <h3 class="font-weight-semi-bold mb-4"><?= format_number($product->price); ?></h3>
-                <span class="mb-4">Stock : <?= $product->stock; ?></span>
+                <span class="mb-4">Stock : <?= $product->stock; ?></span> <br>
+                <span class="mb-4">Satuan : <?= $product->unit; ?></span>
                 <p class="mb-4">
                     <?= $product->description; ?>
                 </p>

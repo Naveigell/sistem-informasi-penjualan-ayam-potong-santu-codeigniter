@@ -89,7 +89,7 @@
                             <div class="col-8">
                                 <p><?= $product->name; ?></p>
                                 <span><?= format_number($product->price); ?></span> <br>
-                                <span>x<?= $product->quantity; ?></span>
+                                <span>x<?= $product->quantity; ?> <?= $product->unit; ?></span>
                             </div>
                             <div class="col-2">
                                 <span class="text text-danger"><?= format_number($product->price * $product->quantity); ?></span>

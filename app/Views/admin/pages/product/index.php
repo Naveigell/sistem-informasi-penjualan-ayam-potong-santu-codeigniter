@@ -24,6 +24,7 @@ Produk
                     <th>Berat</th>
                     <th>Harga</th>
                     <th>Stok</th>
+                    <th>Satuan</th>
                     <th>Deskripsi</th>
                     <th>Action</th>
                 </tr>
@@ -42,6 +43,7 @@ Produk
                         <td><?= format_number($product->weight, ''); ?>gr</td>
                         <td><?= format_number($product->price); ?></td>
                         <td><?= $product->stock; ?></td>
+                        <td><?= $product->unit; ?></td>
                         <td><?= $product->description; ?></td>
                         <td>
                             <a href="<?= route_to('admin.products.edit', $product->product_id); ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>

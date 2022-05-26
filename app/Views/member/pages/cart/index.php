@@ -22,6 +22,7 @@
                     <th>Nama Produk</th>
                     <th>Harga</th>
                     <th>Jumlah</th>
+                    <th>Satuan</th>
                     <th>Total</th>
                     <th>Action</th>
                 </tr>
@@ -36,6 +37,7 @@
                                     <input type="text" class="form-control form-control-sm bg-secondary text-center" disabled value="<?= $cart->quantity; ?>">
                                 </div>
                             </td>
+                            <td class="align-middle"><?= $cart->unit; ?></td>
                             <td class="align-middle"><?= format_number($cart->quantity * $cart->price); ?></td>
                             <td class="align-middle"><button data-url="<?= route_to('member.carts.destroy', $cart->id); ?>" data-target="#deleteModal" data-toggle="modal" class="btn btn-sm btn-primary btn-delete"><i class="fa fa-times"></i></button></td>
                         </tr>

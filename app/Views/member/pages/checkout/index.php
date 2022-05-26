@@ -77,7 +77,7 @@
                         <h5 class="font-weight-medium mb-3">Produk</h5>
                         <?php foreach ($carts as $cart): ?>
                             <div class="d-flex justify-content-between">
-                                <p><?= $cart->name; ?>&nbsp;x <?= $cart->quantity; ?></p>
+                                <p><?= $cart->name; ?>&nbsp;x <?= $cart->quantity; ?> <?= $cart->unit; ?></p>
                                 <p><?= format_number($cart->price * $cart->quantity); ?></p>
                             </div>
                         <?php endforeach; ?>

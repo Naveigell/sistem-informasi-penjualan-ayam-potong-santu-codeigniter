@@ -38,6 +38,10 @@
                     <input name="image" type="file" accept="image/png,image/jpeg,image/jpg" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label>Video Produk</label>
+                    <input name="video" type="file" accept="video/*" class="form-control">
+                </div>
+                <div class="form-group">
                     <label>Nama Produk</label>
                     <input name="name" type="text" class="form-control" value="<?= @$product ? $product->name : ''; ?>">
                 </div>
@@ -80,6 +84,10 @@
                 <div class="form-group">
                     <label>Stok</label>
                     <input name="stock" type="text" class="form-control nominal" value="<?= @$product ? $product->stock : ''; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Satuan</label>
+                    <input name="unit" type="text" class="form-control" value="<?= @$product ? $product->unit : ''; ?>">
                 </div>
                 <div class="form-group">
                     <label>Deskripsi</label>

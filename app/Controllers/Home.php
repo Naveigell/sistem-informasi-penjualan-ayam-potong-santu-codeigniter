@@ -25,7 +25,7 @@ class Home extends BaseController
 
     public function detail($categorySlug, $productSlug)
     {
-        $product = (object) (new Product())->where('slug', $productSlug)->withImages()->first();
+        $product = (object) (new Product())->where('slug', $productSlug)->first();
         $reviews = (new Review())->where('product_id', $product->id)->withUser()->get()->getResultObject();
 
         return view('detail', compact('product', 'reviews'));
