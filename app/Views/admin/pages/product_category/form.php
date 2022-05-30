@@ -26,10 +26,6 @@
                     </div>
                 <?php endif; ?>
                 <div class="form-group">
-                    <label>Foto Produk</label>
-                    <input name="image" type="file" accept="image/png,image/jpeg,image/jpg" class="form-control">
-                </div>
-                <div class="form-group">
                     <label>Nama Kategori</label>
                     <input name="name" type="text" class="form-control" value="<?= @$category ? $category->name : ''; ?>">
                 </div>

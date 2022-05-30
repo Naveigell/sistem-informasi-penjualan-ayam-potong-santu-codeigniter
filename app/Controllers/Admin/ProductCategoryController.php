@@ -42,15 +42,9 @@ class ProductCategoryController extends BaseController
             return redirect()->back()->withInput()->with('errors', $validator->getErrors());
         }
 
-        $image     = $this->request->getFile('image');
-        $imageName = str_random(40) . '.' . $image->getClientExtension();
-
-        $image->move(ROOTPATH . 'public/uploads/images/product_categories', $imageName);
-
         try {
             (new ProductCategory())->insert(array_merge($this->request->getVar(), [
                 "slug"  => str_slug($this->request->getVar('name')),
-                "image" => $imageName,
             ]));
         } catch (\ReflectionException $e) {
             var_dump($e->getMessage());
@@ -61,36 +55,15 @@ class ProductCategoryController extends BaseController
 
     public function update($categoryId)
     {
-        $image = $this->request->getFile('image');
-
-        $rules = [
+        $validator = \Config\Services::validation();
+        $validator->setRules([
             'name' => [
                 'rules' => 'required',
             ],
-        ];
-
-        if ($image->isFile()) {
-            $rules['image'] = [
-                'rules' => 'uploaded[image]|mime_in[image,image/png,image/jpg,image/jpeg]',
-            ];
-        }
-
-        $validator = \Config\Services::validation();
-        $validator->setRules($rules);
+        ]);
 
         if (!$validator->run($this->request->getVar())) {
             return redirect()->back()->withInput()->with('errors', $validator->getErrors());
-        }
-
-        if ($image->isFile()) {
-            $imageName = str_random(40) . '.' . $image->getClientExtension();
-
-            $image->move(ROOTPATH . 'public/uploads/images/product_categories', $imageName);
-
-            $media = (new ProductCategory())->where('id', $categoryId)->first();
-            (new ProductCategory())->update($media['id'], [
-                "image" => $imageName,
-            ]);
         }
 
         try {

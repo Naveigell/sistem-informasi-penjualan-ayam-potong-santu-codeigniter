@@ -12,8 +12,8 @@ class DashboardController extends BaseController
 {
     public function index()
     {
-        $members      = (new User())->where('role', User::ROLE_USER)->countAll();
-        $shippings    = (new Shipping())->where('finished', 0)->countAll();
+        $members      = (new User())->where('role', User::ROLE_USER)->countAllResults();
+        $shippings    = (new Shipping())->where('finished', 0)->countAllResults();
         $incomes      = (new Shipping())->where('finished', 1)->selectSum('total')->first();
         $expenditures = (new Expenditure())->selectSum('total')->first();
 

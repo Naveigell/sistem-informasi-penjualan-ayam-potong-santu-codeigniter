@@ -8,5 +8,5 @@ class ProductCategory extends Model
 {
     protected $table = 'product_categories';
 
-    protected $allowedFields = ['name', 'slug', 'image'];
+    protected $allowedFields = ['name', 'slug'];
 }

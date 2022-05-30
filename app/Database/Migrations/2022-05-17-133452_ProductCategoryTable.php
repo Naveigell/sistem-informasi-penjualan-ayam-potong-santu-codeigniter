@@ -23,10 +23,6 @@ class ProductCategoryTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'image' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('product_categories');

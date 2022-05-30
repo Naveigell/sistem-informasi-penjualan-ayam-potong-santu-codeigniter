@@ -36,6 +36,10 @@ $routes->post('/admin/login', 'Auth\AdminAuthController::store', ["as" => "admin
 
 $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
 
+    $routes->get('chats', 'Admin\ChatController::index', ["as" => "admin.chats.index"]);
+    $routes->get('chats/(:num)', 'Admin\ChatController::show/$1', ["as" => "admin.chats.show"]);
+    $routes->post('chats/(:num)', 'Admin\ChatController::store/$1', ["as" => "admin.chats.store"]);
+
     $routes->get('products', 'Admin\ProductController::index', ["as" => "admin.products.index"]);
     $routes->post('products', 'Admin\ProductController::store', ["as" => "admin.products.store"]);
     $routes->get('products/create', 'Admin\ProductController::create', ["as" => "admin.products.create"]);
@@ -91,6 +95,9 @@ $routes->post('/register', 'Auth\MemberAuthController::doRegister', ["as" => "me
 $routes->get('/logout', 'Auth\AuthController::logout', ["as" => "logout"]);
 
 $routes->group('member', function ($routes) {
+    $routes->get('chats', 'Member\ChatController::index', ["as" => "member.chats.index"]);
+    $routes->post('chats', 'Member\ChatController::store/$1', ["as" => "member.chats.store"]);
+
     $routes->get('carts', 'Member\CartController::index', ["as" => "member.carts.index"]);
     $routes->delete('carts/(:num)', 'Member\CartController::destroy/$1', ["as" => "member.carts.destroy"]);
 
