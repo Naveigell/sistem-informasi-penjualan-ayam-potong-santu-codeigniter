@@ -47,6 +47,13 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
     $routes->put('products/(:num)', 'Admin\ProductController::update/$1', ["as" => "admin.products.update"]);
     $routes->delete('products/(:num)', 'Admin\ProductController::destroy/$1', ["as" => "admin.products.destroy"]);
 
+    $routes->get('capitals', 'Admin\CapitalController::index', ["as" => "admin.capitals.index"]);
+    $routes->post('capitals', 'Admin\CapitalController::store', ["as" => "admin.capitals.store"]);
+    $routes->get('capitals/create', 'Admin\CapitalController::create', ["as" => "admin.capitals.create"]);
+    $routes->get('capitals/(:num)/edit', 'Admin\CapitalController::edit/$1', ["as" => "admin.capitals.edit"]);
+    $routes->put('capitals/(:num)', 'Admin\CapitalController::update/$1', ["as" => "admin.capitals.update"]);
+    $routes->delete('capitals/(:num)', 'Admin\CapitalController::destroy/$1', ["as" => "admin.capitals.destroy"]);
+
     $routes->get('product_categories', 'Admin\ProductCategoryController::index', ["as" => "admin.product-categories.index"]);
     $routes->post('product_categories', 'Admin\ProductCategoryController::store', ["as" => "admin.product-categories.store"]);
     $routes->get('product_categories/create', 'Admin\ProductCategoryController::create', ["as" => "admin.product-categories.create"]);

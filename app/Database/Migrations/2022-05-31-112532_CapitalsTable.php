@@ -18,7 +18,6 @@ class CapitalsTable extends Migration
             'value' => [
                 'type' => 'INT',
                 'constraint' => 20,
-                'unsigned' => true,
             ],
             'publish_date' => [
                 'type' => 'TIMESTAMP',
