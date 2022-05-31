@@ -29,7 +29,7 @@ class MemberAuthController extends BaseController
         }
 
         $user = (object) (new User())->where('email', $this->request->getVar('email'))->first();
-        if (!$user) {
+        if (!count((array) $user)) {
             $validator->setError('auth', 'User not found');
 
             return redirect()->route('member.auth.login.index')->withInput()->with('errors', $validator->getErrors());

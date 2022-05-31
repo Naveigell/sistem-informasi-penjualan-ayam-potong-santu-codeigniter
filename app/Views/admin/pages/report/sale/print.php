@@ -55,13 +55,12 @@
     <table border="0" cellpadding="0" cellspacing="0" width="485" class="border" style="overflow-x:auto;">
         <thead>
         <tr>
-            <td colspan="5" width="485" id="caption"><?= shop_information()['shop_name']; ?></td>
+            <td colspan="4" width="485" id="caption"><?= shop_information()['shop_name']; ?></td>
         </tr>
         <tr>
-            <td colspan="5">Laporan Keuangan <?= shop_information()['shop_name']; ?></td>
+            <td colspan="4">Laporan Keuangan <?= shop_information()['shop_name']; ?></td>
         </tr>
         <tr>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -70,28 +69,24 @@
         </thead>
         <tbody>
         <tr>
-            <th>No</th>
-            <th>Tanggal</th>
-            <th>Debit</th>
-            <th>Kredit</th>
-            <th>Total</th>
+            <th>Produk</th>
+            <th>Satuan (Kg)</th>
+            <th>Harga per/Kg (Rp)</th>
+            <th>Total Harga (Rp)</th>
         </tr>
 
-        <?php
+        <?php /** @var array $orders */
         $total = 0;
-
-        foreach($finances as $index => $finance): ?>
-            <?php $total += @$finance->order_id ? $finance->total : -$finance->total; ?>
+        foreach($orders as $order): ?>
             <tr>
-                <td align="right"><?= $index + 1; ?></td>
-                <td><?= date('d F Y', strtotime($finance->date)) ?></td>
-                <td align="right"><?= @$finance->order_id ? format_number($finance->total) : '-'; ?></td>
-                <td><?= @$finance->rand_id ? format_number($finance->total) : '-'; ?></td>
-                <td> <?= format_number($total); ?></td>
+                <td><?= $order->name; ?></td>
+                <td><?= $order->quantity . ' ' . $order->unit; ?></td>
+                <td><?= format_number($order->price); ?></td>
+                <td><?php $total += $order->price * $order->quantity; echo format_number($order->price * $order->quantity); ?></td>
             </tr>
         <?php endforeach; ?>
         <tr>
-            <th colspan="4"> TOTAL</th>
+            <th colspan="3"> TOTAL</th>
             <th><?= format_number($total); ?></th>
         </tr>
         </tbody>
@@ -102,15 +97,14 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
             </tr>
         <?php endfor; ?>
         <tr class="ttd">
-            <th colspan="4"></th>
+            <th colspan="3"></th>
             <th colspan="1">Mengetahui</th>
         </tr>
         <tr>
-            <td colspan="4"></td>
+            <td colspan="3"></td>
             <td colspan="1"><?= shop_information()['shop_owner']; ?></td>
         </tr>
         </tfoot>

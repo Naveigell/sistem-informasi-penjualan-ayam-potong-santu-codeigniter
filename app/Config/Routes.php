@@ -76,8 +76,11 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
 
     $routes->get('dashboard', 'Admin\DashboardController::index', ["as" => "admin.dashboard.index"]);
 
-    $routes->get('reports', 'Admin\ReportController::index', ["as" => "admin.reports.index"]);
-    $routes->get('reports/print', 'Admin\ReportController::print', ["as" => "admin.reports.print"]);
+    $routes->get('reports/profit-loss', 'Admin\ProfitLossReportController::index', ["as" => "admin.report.profit-loss.index"]);
+    $routes->get('reports/profit-loss/print', 'Admin\ProfitLossReportController::print', ["as" => "admin.report.profit-loss.print"]);
+
+    $routes->get('reports/sale', 'Admin\SaleReportController::index', ["as" => "admin.report.sale.index"]);
+    $routes->get('reports/sale/print', 'Admin\SaleReportController::print', ["as" => "admin.report.sale.print"]);
 
     $routes->get('expenditures', 'Admin\ExpenditureController::index', ["as" => "admin.expenditures.index"]);
     $routes->get('expenditures/create', 'Admin\ExpenditureController::create', ["as" => "admin.expenditures.create"]);

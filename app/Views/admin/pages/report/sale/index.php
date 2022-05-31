@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/admin/admin') ?>
 
 <?= $this->section('content-title') ?>
-    Laporan
+    Laporan Penjualan
 <?= $this->endSection() ?>
 
 <?= $this->section('content-body') ?>
@@ -16,7 +16,7 @@
         <div class="card-header">
             <h4 class="d-inline">Laporan</h4>
             <div class="card-header-action">
-                <a href="<?= route_to('admin.reports.print') . '?' . http_build_query($querystring); ?>" class="btn btn-primary"><i class="fa fa-print"></i> &nbsp; Print</a>
+                <a href="<?= route_to('admin.report.sale.print') . '?' . http_build_query($querystring); ?>" class="btn btn-primary"><i class="fa fa-print"></i> &nbsp; Print</a>
             </div>
         </div>
         <div class="card-body">
@@ -41,24 +41,29 @@
                 <table class="table data-table" id="table-2">
                     <thead>
                     <tr>
-                        <th>Tanggal</th>
-                        <th>Debit</th>
-                        <th>Kredit</th>
-                        <th>Total</th>
+                        <th>Produk</th>
+                        <th>Satuan (Kg)</th>
+                        <th>Harga per/Kg (Rp)</th>
+                        <th>Total Harga (Rp)</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <?php /** @var array $finances */
+                    <?php /** @var array $orders */
                         $total = 0;
-                        foreach($finances as $finance): ?>
-                            <?php $total += @$finance->order_id ? $finance->total : -$finance->total; ?>
+                        foreach($orders as $order): ?>
                             <tr>
-                                <td><?= date('d F Y', strtotime($finance->date)); ?></td>
-                                <td><?= @$finance->order_id ? format_number($finance->total) : '-'; ?></td>
-                                <td><?= @$finance->rand_id ? format_number($finance->total) : '-'; ?></td>
-                                <td><?= format_number($total) ?></td>
+                                <td><?= $order->name; ?></td>
+                                <td><?= $order->quantity . ' ' . $order->unit; ?></td>
+                                <td><?= format_number($order->price); ?></td>
+                                <td><?php $total += $order->price * $order->quantity; echo format_number($order->price * $order->quantity); ?></td>
                             </tr>
                         <?php endforeach; ?>
+                        <tr style="border-top: 1px solid #f5f3f3;">
+                            <td><b>Total Penjualan</b></td>
+                            <td></td>
+                            <td></td>
+                            <td><b><?= format_number($total); ?></b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
