@@ -61,6 +61,7 @@
 
 $total = 0;
 $totalExpenditure = 0;
+$totalCapital = 0;
 ?>
 <div id="printable" class="container">
     <table id="tbl" border="0" cellpadding="0" cellspacing="0" width="485" class="border" style="overflow-x:auto;">
@@ -97,6 +98,24 @@ $totalExpenditure = 0;
             <td></td>
             <td></td>
             <td><b><?= format_number($total); ?></b></td>
+        </tr>
+        <tr>
+            <td><b>Modal</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <?php /** @var array $capitals */
+        foreach($capitals as $capital): ?>
+            <tr>
+                <td>Modal Awal</td>
+                <td>-</td>
+                <td><b>(<?php $totalCapital += $capital->value; echo format_number($capital->value); ?>)</b></td>
+            </tr>
+        <?php endforeach; ?>
+        <tr>
+            <td><b>Laba Rugi Kotor</b></td>
+            <td></td>
+            <td><b><?php $total -= $totalCapital; echo format_number($total); ?></b></td>
         </tr>
         <tr>
             <td><b>Pengeluaran</b></td>

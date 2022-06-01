@@ -8,6 +8,7 @@
     <?php
         $total = 0;
         $totalExpenditure = 0;
+        $totalCapital = 0;
         $querystring = [
             "from" => array_key_exists('from', $_GET) ? $_GET['from'] : '',
             "to"   => array_key_exists('to', $_GET) ? $_GET['to'] : '',
@@ -40,7 +41,7 @@
                 </div>
             </form>
             <div class="table-responsive">
-                <table class="table data-table" id="table-2">
+                <table class="table" id="table-2">
                     <thead>
                         <tr>
                             <th></th>
@@ -66,6 +67,24 @@
                             <td></td>
                             <td></td>
                             <td><b><?= format_number($total); ?></b></td>
+                        </tr>
+                        <tr>
+                            <td><b>Modal</b></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <?php /** @var array $capitals */
+                        foreach($capitals as $capital): ?>
+                            <tr>
+                                <td>Modal Awal</td>
+                                <td>-</td>
+                                <td><b>(<?php $totalCapital += $capital->value; echo format_number($capital->value); ?>)</b></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <tr>
+                            <td><b>Laba Rugi Kotor</b></td>
+                            <td></td>
+                            <td><b><?php $total -= $totalCapital; echo format_number($total); ?></b></td>
                         </tr>
                         <tr>
                             <td><b>Pengeluaran</b></td>

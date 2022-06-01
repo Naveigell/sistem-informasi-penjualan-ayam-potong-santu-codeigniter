@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\Capital;
 use App\Models\Expenditure;
 use App\Models\Order;
 use App\Models\Shipping;
@@ -14,19 +15,35 @@ class ProfitLossReportController extends BaseController
     {
         $orders       = $this->calculateOrder();
         $expenditures = $this->calculateExpenditure();
+        $capitals     = $this->calculateCapital();
 
-        return view('admin/pages/report/profit_loss/index', compact('orders', 'expenditures'));
+        return view('admin/pages/report/profit_loss/index', compact('orders', 'expenditures', 'capitals'));
     }
 
     public function print()
     {
         $orders       = $this->calculateOrder();
         $expenditures = $this->calculateExpenditure();
+        $capitals     = $this->calculateCapital();
 
-        return view('admin/pages/report/profit_loss/print', compact('orders', 'expenditures'));
+        return view('admin/pages/report/profit_loss/print', compact('orders', 'expenditures', 'capitals'));
     }
 
-    public function calculateExpenditure()
+    private function calculateCapital()
+    {
+        $from = $this->request->getVar('from');
+        $to   = $this->request->getVar('to');
+
+        $capitals = (new Capital());
+
+        if ($from && $to) {
+            $capitals->where("DATE(publish_date) BETWEEN '{$from}' AND '{$to}'");
+        }
+
+        return $capitals->get()->getResultObject();
+    }
+
+    private function calculateExpenditure()
     {
         $from = $this->request->getVar('from');
         $to   = $this->request->getVar('to');
@@ -43,7 +60,7 @@ class ProfitLossReportController extends BaseController
         return (new SubExpenditure())->whereIn('expenditure_id', count($expendituresIds) > 0 ? $expendituresIds : [''])->get()->getResultObject();
     }
 
-    public function calculateOrder()
+    private function calculateOrder()
     {
         $from = $this->request->getVar('from');
         $to   = $this->request->getVar('to');
