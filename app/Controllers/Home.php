@@ -28,6 +28,6 @@ class Home extends BaseController
         $product = (object) (new Product())->where('slug', $productSlug)->first();
         $reviews = (new Review())->where('product_id', $product->id)->withUser()->get()->getResultObject();
 
-        return view('detail', compact('product', 'reviews'));
+        return view('detail', compact('product', 'reviews', 'categorySlug', 'productSlug'));
     }
 }

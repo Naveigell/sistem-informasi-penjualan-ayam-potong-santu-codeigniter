@@ -18,6 +18,8 @@
     <!-- Page Header End -->
     <?php /** @var stdClass $product */ ?>
     <?php /** @var array $reviews */ ?>
+    <?php /** @var string $categorySlug */ ?>
+    <?php /** @var string $productSlug */ ?>
 
     <?php
         $medias = (new \App\Models\ProductMedia())->where('product_id', $product->id)->get()->getResultObject();
@@ -68,13 +70,27 @@
                     </div>
                     <small class="pt-1">(50 Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4"><?= format_number($product->price); ?></h3>
-                <span class="mb-4">Stock : <?= $product->stock; ?></span> <br>
-                <span class="mb-4">Satuan : <?= $product->unit; ?></span>
+                <?php
+                    $subProducts = (new \App\Models\SubProduct())->where('product_id', $product->id)->get()->getResultObject();
+                    $subProductIndex = array_key_exists('sub_id', $_GET) ? $_GET['sub_id'] : 0;
+
+                    if (count($subProducts) == 0) {
+                        $subProductIndex = null;
+                    }
+                ?>
+                <h3 class="font-weight-semi-bold mb-4"><?= $subProductIndex ? format_number($subProducts[$subProductIndex]->price) : '-'; ?></h3>
+                <span class="mb-4">Sisa Stok : <?= $subProductIndex ? $subProducts[$subProductIndex]->stock : '-'; ?></span> <br>
+                <span class="mb-4"> <label for="">Pilih Satuan : </label>
+                    <select name="unit" id="unit-dropdown" class="form-control">
+                        <?php foreach($subProducts as $index => $subProduct): ?>
+                            <option data-url="<?= route_to('member.home.detail', $categorySlug, $productSlug) . '?' . http_build_query(['sub_id' => $index]); ?>" <?= $subProductIndex == $index ? 'selected' : ''; ?>><?= $subProduct->unit; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </span>
                 <p class="mb-4">
                     <?= $product->description; ?>
                 </p>
-                <form method="post" action="<?= route_to('member.carts.store', $product->id); ?>" class="d-flex align-items-center mb-4 pt-2">
+                <form method="post" action="<?= $subProductIndex ? route_to('member.carts.store', $product->id, $subProducts[$subProductIndex]->id) : '#'; ?>" class="d-flex align-items-center mb-4 pt-2">
                     <?= csrf_field(); ?>
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
@@ -148,9 +164,13 @@
                 }
             }
 
-            if (newVal >= 1 && newVal <= <?= $product->stock ?>) {
+            if (newVal >= 1 && newVal <= <?= $subProductIndex ? $subProducts[$subProductIndex]->stock : 1 ?>) {
                 button.parent().parent().find('input').val(newVal);
             }
         });
+
+        $('#unit-dropdown').on('change', function () {
+            window.location.href = $(this).find(':selected').data('url');
+        })
     </script>
 <?= $this->endSection() ?>

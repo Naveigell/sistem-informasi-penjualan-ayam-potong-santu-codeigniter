@@ -40,6 +40,13 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
     $routes->get('chats/(:num)', 'Admin\ChatController::show/$1', ["as" => "admin.chats.show"]);
     $routes->post('chats/(:num)', 'Admin\ChatController::store/$1', ["as" => "admin.chats.store"]);
 
+    $routes->get('products/(:num)/subs', 'Admin\SubProductController::index/$1', ["as" => "admin.sub-products.index"]);
+    $routes->post('products/(:num)/subs', 'Admin\SubProductController::store/$1', ["as" => "admin.sub-products.store"]);
+    $routes->get('products/create/(:num)/subs', 'Admin\SubProductController::create/$1', ["as" => "admin.sub-products.create"]);
+    $routes->get('products/(:num)/edit/subs/(:num)', 'Admin\SubProductController::edit/$1/$2', ["as" => "admin.sub-products.edit"]);
+    $routes->put('products/(:num)/subs/(:num)', 'Admin\SubProductController::update/$1/$2', ["as" => "admin.sub-products.update"]);
+    $routes->delete('products/(:num)/subs/(:num)', 'Admin\SubProductController::destroy/$1/$2', ["as" => "admin.sub-products.destroy"]);
+
     $routes->get('products', 'Admin\ProductController::index', ["as" => "admin.products.index"]);
     $routes->post('products', 'Admin\ProductController::store', ["as" => "admin.products.store"]);
     $routes->get('products/create', 'Admin\ProductController::create', ["as" => "admin.products.create"]);
@@ -130,7 +137,7 @@ $routes->group('member', function ($routes) {
     $routes->post('suggestions', 'Member\SuggestionController::store', ["as" => "member.suggestions.store"]);
 });
 
-$routes->post('/carts/(:num)', 'Member\CartController::store/$1', ["as" => "member.carts.store"]);
+$routes->post('/carts/(:num)/(:num)', 'Member\CartController::store/$1/$2', ["as" => "member.carts.store"]);
 $routes->get('/(:any)/(:any)', 'Home::detail/$1/$2', ["as" => "member.home.detail"]);
 $routes->get('/(:any)', 'Home::category/$1', ["as" => "member.home.categories"]);
 
