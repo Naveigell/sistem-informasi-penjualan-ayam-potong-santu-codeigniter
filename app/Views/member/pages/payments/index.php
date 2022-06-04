@@ -46,7 +46,7 @@
                                 <div class="card-header-action text-right">
                                     <button class="btn btn-success">Pesanan Selesai</button>
                                     <a href="<?= route_to('member.reviews.index', $shipping->id); ?>" class="btn btn-warning">Penilaian</a>
-                                    <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
+                                    <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa  -print"></i></a>
                                 </div>
                             <?php else: ?>
                                 <div class="card-header-action text-right">

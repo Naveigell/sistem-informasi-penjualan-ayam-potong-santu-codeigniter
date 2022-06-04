@@ -18,6 +18,7 @@
                         <th>Nama Produk</th>
                         <th>Harga</th>
                         <th>Jumlah</th>
+                        <th>Varian</th>
                         <th>Total</th>
                         <th>Tanggal</th>
                     </tr>
@@ -27,7 +28,7 @@
                     foreach($shippings as $shipping): ?>
 
                         <?php
-                            $orders = (new \App\Models\Order())->withProduct()->withImages()->where('shipping_id', $shipping->id)->get()->getResultObject();
+                            $orders = (new \App\Models\Order())->withProduct()->withSubProduct()->withImages()->where('shipping_id', $shipping->id)->get()->getResultObject();
                         ?>
 
                         <?php foreach($orders as $order): ?>
@@ -36,9 +37,10 @@
                                     <img alt="image" src="<?= base_url('/uploads/images/products/' . $order->media); ?>" width="250" height="250">
                                 </td>
                                 <td><?= $order->name ?></td>
-                                <td><?= format_number($order->price) ?></td>
+                                <td><?= format_number($order->sub_product_price) ?></td>
                                 <td>x<?= $order->quantity ?></td>
-                                <td><?= format_number($order->price * $order->quantity) ?></td>
+                                <td><?= $order->sub_product_unit; ?></td>
+                                <td><?= format_number($order->sub_product_price * $order->quantity) ?></td>
                                 <td><?= date('d F Y', strtotime($shipping->finished_date)) ?></td>
                             </tr>
                         <?php endforeach; ?>

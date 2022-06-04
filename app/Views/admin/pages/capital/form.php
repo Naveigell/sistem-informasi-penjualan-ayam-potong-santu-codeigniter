@@ -27,7 +27,7 @@
                 <?php endif; ?>
                 <div class="form-group">
                     <label>Jumlah</label>
-                    <input name="value" type="number" class="form-control" value="<?= @$capital ? $capital->value : ''; ?>">
+                    <input name="value" type="text" class="form-control nominal" value="<?= @$capital ? $capital->value : ''; ?>">
                 </div>
                 <div class="form-group">
                     <label>Tanggal</label>

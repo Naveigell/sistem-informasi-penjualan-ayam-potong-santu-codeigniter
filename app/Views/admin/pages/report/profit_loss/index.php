@@ -58,8 +58,8 @@
                         <?php /** @var array $orders */
                         foreach($orders as $order): ?>
                             <tr>
-                                <td><?= $order->name; ?> - <?= $order->quantity; ?> <?= $order->unit; ?></td>
-                                <td><?php $total += $order->quantity * $order->price; echo format_number($order->quantity * $order->price); ?></td>
+                                <td><?= $order->name; ?> - x<?= $order->quantity; ?> (<?= $order->sub_product_unit; ?>)</td>
+                                <td><?php $total += $order->quantity * $order->sub_product_price; echo format_number($order->quantity * $order->sub_product_price); ?></td>
                                 <td></td>
                             </tr>
                         <?php endforeach; ?>

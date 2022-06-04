@@ -42,6 +42,7 @@
                     <thead>
                     <tr>
                         <th>Produk</th>
+                        <th>Jumlah</th>
                         <th>Satuan (Kg)</th>
                         <th>Harga per/Kg (Rp)</th>
                         <th>Total Harga (Rp)</th>
@@ -53,13 +54,15 @@
                         foreach($orders as $order): ?>
                             <tr>
                                 <td><?= $order->name; ?></td>
-                                <td><?= $order->quantity . ' ' . $order->unit; ?></td>
-                                <td><?= format_number($order->price); ?></td>
-                                <td><?php $total += $order->price * $order->quantity; echo format_number($order->price * $order->quantity); ?></td>
+                                <td>x<?= $order->quantity; ?></td>
+                                <td><?= $order->sub_product_unit; ?></td>
+                                <td><?= format_number($order->sub_product_price); ?></td>
+                                <td><?php $total += $order->sub_product_price * $order->quantity; echo format_number($order->sub_product_price * $order->quantity); ?></td>
                             </tr>
                         <?php endforeach; ?>
                         <tr style="border-top: 1px solid #f5f3f3;">
                             <td><b>Total Penjualan</b></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td><b><?= format_number($total); ?></b></td>
