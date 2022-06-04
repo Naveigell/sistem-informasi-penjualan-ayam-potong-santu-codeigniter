@@ -94,7 +94,7 @@
         <tr>
             <th>No</th>
             <th>HARGA SATUAN</th>
-            <th>VARIAN</th>
+            <th>SATUAN</th>
             <th>JUMLAH</th>
             <th>TOTAL</th>
             <th colspan="2">KETERANGAN</th>

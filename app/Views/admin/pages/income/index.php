@@ -18,7 +18,7 @@
                         <th>Nama Produk</th>
                         <th>Harga</th>
                         <th>Jumlah</th>
-                        <th>Varian</th>
+                        <th>Satuan</th>
                         <th>Total</th>
                         <th>Tanggal</th>
                     </tr>
