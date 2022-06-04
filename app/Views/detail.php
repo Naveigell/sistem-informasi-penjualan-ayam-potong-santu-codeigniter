@@ -6,6 +6,7 @@
             color: #f37809;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <?= $this->endSection() ?>
 
 <?= $this->section('content-body') ?>
@@ -20,6 +21,7 @@
     <?php /** @var array $reviews */ ?>
     <?php /** @var string $categorySlug */ ?>
     <?php /** @var string $productSlug */ ?>
+    <?php /** @var integer $reviewsValue */ ?>
 
     <?php
         $medias = (new \App\Models\ProductMedia())->where('product_id', $product->id)->get()->getResultObject();
@@ -62,35 +64,86 @@
                 <h3 class="font-weight-semi-bold"><?= $product->name; ?></h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
+                        <?php for ($i = 0; $i < $reviewsValue; $i++): ?>
+                            <small class="fas fa-star"></small>
+                        <?php endfor; ?>
+                        <?php for ($i = $reviewsValue; $i < 5; $i++): ?>
+                            <small class="far fa-star"></small>
+                        <?php endfor; ?>
                     </div>
-                    <small class="pt-1">(50 Reviews)</small>
+                    <small class="pt-1">(<?= count($reviews); ?> Reviews)</small>
                 </div>
                 <?php
                     $subProducts = (new \App\Models\SubProduct())->where('product_id', $product->id)->get()->getResultObject();
-                    $subProductIndex = array_key_exists('sub_id', $_GET) ? $_GET['sub_id'] : 0;
+                    $subProductIndex = array_key_exists('sub_id', $_GET) ? $_GET['sub_id'] : -1;
+
+                    $prices = array_map(function ($item) {
+                        return $item->price;
+                    }, $subProducts);
+
+                    $stocks = array_map(function ($item) {
+                        return $item->stock;
+                    }, $subProducts);
+
+                    sort($prices);
+                    sort($stocks);
+
+                    $startPrice = reset($prices);
+                    $endPrice   = end($prices);
+
+                    $startStock = reset($stocks);
+                    $endStock   = end($stocks);
 
                     if (count($subProducts) == 0) {
                         $subProductIndex = -1;
                     }
                 ?>
-                <h3 class="font-weight-semi-bold mb-4"><?= $subProductIndex >= 0 ? format_number($subProducts[$subProductIndex]->price) : '-'; ?></h3>
-                <span class="mb-4">Sisa Stok : <?= $subProductIndex >= 0 ? $subProducts[$subProductIndex]->stock : '-'; ?></span> <br>
-                <span class="mb-4"> <label for="">Pilih Satuan : </label>
-                    <select name="unit" id="unit-dropdown" class="form-control">
-                        <?php foreach($subProducts as $index => $subProduct): ?>
-                            <option data-url="<?= route_to('member.home.detail', $categorySlug, $productSlug) . '?' . http_build_query(['sub_id' => $index]); ?>" <?= $subProductIndex == $index ? 'selected' : ''; ?>><?= $subProduct->unit; ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                <h3 class="font-weight-semi-bold mb-4">
+
+                    <?php if(!array_key_exists('sub_id', $_GET)): ?>
+
+                        <?php if($startPrice === $endPrice): ?>
+                            <?= format_number($startPrice); ?>
+                        <?php else: ?>
+                            <?= format_number($startPrice); ?> - <?= format_number($endPrice); ?>
+                        <?php endif; ?>
+
+                    <?php else: ?>
+
+                        <?= $subProductIndex >= 0 ? format_number($subProducts[$subProductIndex]->price) : '-'; ?>
+
+                    <?php endif; ?>
+                </h3>
+                <span class="mb-4">
+                    Sisa Stok :
+
+                    <?php if(!array_key_exists('sub_id', $_GET)): ?>
+
+                        <?php if($startStock === $endStock): ?>
+                            <?= $startStock; ?>
+                        <?php else: ?>
+                            <?= $startStock; ?> - <?= $endStock; ?>
+                        <?php endif; ?>
+
+                    <?php else: ?>
+
+                        <?= $subProductIndex >= 0 ? $subProducts[$subProductIndex]->stock : '-'; ?>
+
+                    <?php endif; ?>
                 </span>
+                <br>
+                <div class="mb-4">
+                    <label for="">Pilih Satuan : </label>
+                    <div class="form-group" id="variant-container">
+                        <?php foreach($subProducts as $index => $subProduct): ?>
+                            <a href="<?= route_to('member.home.detail', $categorySlug, $productSlug) . '?' . http_build_query(['sub_id' => $index]); ?>"  class="btn btn-sm <?= $subProductIndex == $index ? 'btn-primary' : 'btn-light'; ?>" <?php if($subProductIndex == $index): ?> style="color: white;" <?php else: ?> style="border: 1px solid #b5b1b1;" <?php endif; ?>><?= $subProduct->unit; ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
                 <p class="mb-4">
                     <?= $product->description; ?>
                 </p>
-                <form method="post" action="<?= $subProductIndex >= 0 ? route_to('member.carts.store', $product->id, $subProducts[$subProductIndex]->id) : '#'; ?>" class="d-flex align-items-center mb-4 pt-2">
+                <form method="post" <?php if($subProductIndex < 0): ?> onsubmit="animateVariantContainer(); return false;" <?php endif; ?> action="<?= $subProductIndex >= 0 ? route_to('member.carts.store', $product->id, $subProducts[$subProductIndex]->id) : '#'; ?>" class="d-flex align-items-center mb-4 pt-2">
                     <?= csrf_field(); ?>
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
@@ -98,7 +151,7 @@
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input name="quantity" type="text" class="form-control bg-secondary text-center" value="1" min="1" max="<?= $subProducts[$subProductIndex]->stock; ?>">
+                        <input name="quantity" type="text" class="form-control bg-secondary text-center" value="1" min="1" max="<?= $subProductIndex >= 0 ? $subProducts[$subProductIndex]->stock : 0; ?>">
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
@@ -177,6 +230,14 @@
 
         $('#unit-dropdown').on('change', function () {
             window.location.href = $(this).find(':selected').data('url');
-        })
+        });
+
+        $('#variant-container').on('animationend', function () {
+            $(this).removeClass(['animate__animated', 'animate__shakeX']);
+        });
+
+        function animateVariantContainer() {
+            $('#variant-container').addClass(['animate__animated', 'animate__shakeX']);
+        }
     </script>
 <?= $this->endSection() ?>

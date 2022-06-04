@@ -28,6 +28,23 @@ class Home extends BaseController
         $product = (object) (new Product())->where('slug', $productSlug)->first();
         $reviews = (new Review())->where('product_id', $product->id)->withUser()->get()->getResultObject();
 
-        return view('detail', compact('product', 'reviews', 'categorySlug', 'productSlug'));
+        $reviewsValue = $this->calculateReviews($product->id);
+        $reviewsValue = floor($reviewsValue);
+
+        return view('detail', compact('product', 'reviews', 'categorySlug', 'productSlug', 'reviewsValue'));
+    }
+
+    private function calculateReviews($productId)
+    {
+        $reviews = (new Review())->where('product_id', $productId)->get()->getResultObject();
+
+        $totalReviews = array_map(function ($review) {
+            return $review->star;
+        }, $reviews);
+
+        $totalReviews    = array_sum($totalReviews);
+        $maxReviewsValue = count($reviews) * 5;
+
+        return 5 - (5 * ($maxReviewsValue - $totalReviews) / $maxReviewsValue);
     }
 }

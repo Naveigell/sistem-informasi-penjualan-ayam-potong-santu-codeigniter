@@ -115,9 +115,8 @@
         <?php $total += $order->sub_product_price * $order->quantity; ?>
         <?php endforeach; ?>
         <tr>
-            <th colspan="3"> TOTAL</th>
+            <th colspan="4"> TOTAL</th>
             <td><?= format_number($total); ?></td>
-            <td colspan="2"></td>
         </tr>
         </tbody>
         <tfoot>
