@@ -4,7 +4,7 @@
 <?php /** @var array $carts */ ?>
 
 <?php $total = array_reduce($carts, function ($initial, $cart) {
-    return $initial + $cart->quantity * $cart->price;
+    return $initial + $cart->quantity * $cart->sub_product_price;
 }, 0); ?>
 
 <div class="container-fluid bg-secondary mb-5">
@@ -31,14 +31,14 @@
                     <?php foreach ($carts as $cart): ?>
                         <tr>
                             <td class="align-middle"><img src="<?= base_url('/uploads/images/products/' . $cart->media); ?>" alt="" style="width: 50px;"> <?= $cart->name; ?></td>
-                            <td class="align-middle"><?= format_number($cart->price); ?></td>
+                            <td class="align-middle"><?= format_number($cart->sub_product_price); ?></td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <input type="text" class="form-control form-control-sm bg-secondary text-center" disabled value="<?= $cart->quantity; ?>">
                                 </div>
                             </td>
-                            <td class="align-middle"><?= $cart->unit; ?></td>
-                            <td class="align-middle"><?= format_number($cart->quantity * $cart->price); ?></td>
+                            <td class="align-middle"><?= $cart->sub_product_unit; ?></td>
+                            <td class="align-middle"><?= format_number($cart->quantity * $cart->sub_product_price); ?></td>
                             <td class="align-middle"><button data-url="<?= route_to('member.carts.destroy', $cart->id); ?>" data-target="#deleteModal" data-toggle="modal" class="btn btn-sm btn-primary btn-delete"><i class="fa fa-times"></i></button></td>
                         </tr>
                     <?php endforeach; ?>

@@ -8,7 +8,7 @@ class Review extends Model
 {
     protected $table = 'reviews';
 
-    protected $allowedFields = ['user_id', 'product_id', 'shipping_id', 'star', 'description'];
+    protected $allowedFields = ['user_id', 'product_id', 'sub_product_id', 'shipping_id', 'star', 'description'];
 
     public function withUser()
     {

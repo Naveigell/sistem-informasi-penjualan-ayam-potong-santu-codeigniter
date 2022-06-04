@@ -33,9 +33,6 @@ class ProductCategoryController extends BaseController
             'name' => [
                 'rules' => 'required',
             ],
-            'image' => [
-                'rules' => 'uploaded[image]|mime_in[image,image/png,image/jpg,image/jpeg]',
-            ],
         ]);
 
         if (!$validator->run($this->request->getVar())) {

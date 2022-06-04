@@ -10,7 +10,7 @@
 
     <?php
         $total = array_reduce($orders, function ($initial, $order) {
-            return $initial + $order->price * $order->quantity;
+            return $initial + $order->sub_product_price * $order->quantity;
         }, 0);
     ?>
 
@@ -26,11 +26,12 @@
                     </div>
                     <div class="col-8">
                         <p><?= $order->name; ?></p>
-                        <span><?= format_number($order->price); ?></span> <br>
-                        <span>x<?= $order->quantity; ?></span>
+                        <span><?= format_number($order->sub_product_price); ?></span> <br>
+                        <span>x<?= $order->quantity; ?></span> <br>
+                        <span>Varian : <?= $order->sub_product_unit; ?></span> <br>
                     </div>
                     <div class="col-2">
-                        <span class="text text-danger"><?= format_number($order->price * $order->quantity); ?></span>
+                        <span class="text text-danger"><?= format_number($order->sub_product_price * $order->quantity); ?></span>
                     </div>
                 </div>
                 <hr>

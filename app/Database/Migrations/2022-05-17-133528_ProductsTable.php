@@ -31,25 +31,6 @@ class ProductsTable extends Migration
             'description' => [
                 'type' => 'TEXT',
             ],
-            'weight' => [
-                'type' => 'INT',
-                'constraint' => 100,
-                'unsigned' => true,
-            ],
-            'price' => [
-                'type' => 'INT',
-                'constraint' => 100,
-                'unsigned' => true,
-            ],
-            'stock' => [
-                'type' => 'INT',
-                'constraint' => 100,
-                'unsigned' => true,
-            ],
-            'unit' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20,
-            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('category_id', 'product_categories', 'id', 'CASCADE', 'CASCADE');

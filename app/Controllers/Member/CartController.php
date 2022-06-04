@@ -9,12 +9,12 @@ class CartController extends BaseController
 {
     public function index()
     {
-        $carts = (new Cart())->withProduct()->withImages()->get()->getResultObject();
+        $carts = (new Cart())->withProduct()->withImages()->withSubProduct()->get()->getResultObject();
 
         return view('member/pages/cart/index', compact('carts'));
     }
 
-    public function store($productId)
+    public function store($productId, $subProductId)
     {
         $validator = \Config\Services::validation();
         $validator->setRules([
@@ -30,6 +30,7 @@ class CartController extends BaseController
         try {
             (new Cart())->insert([
                 "product_id" => $productId,
+                "sub_product_id" => $subProductId,
                 "user_id" => session()->get('user')->id,
                 "quantity" => $this->request->getVar('quantity')
             ]);

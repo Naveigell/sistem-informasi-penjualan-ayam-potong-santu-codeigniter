@@ -4,7 +4,7 @@
     <?php /** @var object $shipping */ ?>
 
     <?php
-        $products = (new \App\Models\Order())->withProduct()->withImages()->where('shipping_id', $shipping->id)->get()->getResultObject();
+        $products = (new \App\Models\Order())->withProduct()->withSubProduct()->withImages()->where('shipping_id', $shipping->id)->get()->getResultObject();
         $area     = (new \App\Models\ShippingCost())->where('id', $shipping->area_id)->first();
         $total    = 0;
     ?>
@@ -29,15 +29,16 @@
                         </div>
                         <div class="col-8">
                             <p><?= $product->name; ?></p>
-                            <span><?= format_number($product->price); ?></span> <br>
-                            <span>x<?= $product->quantity; ?></span>
+                            <span><?= format_number($product->sub_product_price); ?></span> <br>
+                            <span>x<?= $product->quantity; ?></span> <br>
+                            <span>Varian : <?= $product->sub_product_unit; ?></span>
                         </div>
                         <div class="col-2">
-                            <span class="text text-danger"><?= format_number($product->price * $product->quantity); ?></span>
+                            <span class="text text-danger"><?= format_number($product->sub_product_price * $product->quantity); ?></span>
                         </div>
                     </div>
                     <hr>
-                    <?php $total += $product->price * $product->quantity; ?>
+                    <?php $total += $product->sub_product_price * $product->quantity; ?>
                 <?php endforeach; ?>
                 <div class="row">
                     <div class="col-12">

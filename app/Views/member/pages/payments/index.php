@@ -13,7 +13,7 @@
         <?php foreach ($shippings as $shipping): ?>
 
             <?php
-                $products = (new \App\Models\Order())->withProduct()->withImages()->where('shipping_id', $shipping->id)->get()->getResultObject();
+                $products = (new \App\Models\Order())->withProduct()->withSubProduct()->withImages()->where('shipping_id', $shipping->id)->get()->getResultObject();
                 $area     = (new \App\Models\ShippingCost())->where('id', $shipping->area_id)->first();
                 $payment  = (new \App\Models\Payment())->where('shipping_id', $shipping->id)->first();
                 $total    = 0;
@@ -51,7 +51,9 @@
                             <?php else: ?>
                                 <div class="card-header-action text-right">
                                     <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
-                                    <button data-url="<?= route_to('member.shippings.finish', $shipping->id); ?>" data-target="#finishModal" data-toggle="modal" class="btn btn-success btn-finish">Selesaikan Pesanan</button>
+                                    <?php if($payment['status'] == \App\Models\Payment::STATUS_VALID): ?>
+                                        <button data-url="<?= route_to('member.shippings.finish', $shipping->id); ?>" data-target="#finishModal" data-toggle="modal" class="btn btn-success btn-finish">Selesaikan Pesanan</button>
+                                    <?php endif; ?>
                                     <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
                                 </div>
                             <?php endif; ?>
@@ -88,15 +90,15 @@
                             </div>
                             <div class="col-8">
                                 <p><?= $product->name; ?></p>
-                                <span><?= format_number($product->price); ?></span> <br>
-                                <span>x<?= $product->quantity; ?> <?= $product->unit; ?></span>
+                                <span><?= format_number($product->sub_product_price); ?></span> <br>
+                                <span>x<?= $product->quantity; ?> <?= $product->sub_product_unit; ?></span>
                             </div>
                             <div class="col-2">
-                                <span class="text text-danger"><?= format_number($product->price * $product->quantity); ?></span>
+                                <span class="text text-danger"><?= format_number($product->sub_product_price * $product->quantity); ?></span>
                             </div>
                         </div>
                         <hr>
-                        <?php $total += $product->price * $product->quantity; ?>
+                        <?php $total += $product->sub_product_price * $product->quantity; ?>
                     <?php endforeach; ?>
                     <div class="row">
                         <div class="col-9">

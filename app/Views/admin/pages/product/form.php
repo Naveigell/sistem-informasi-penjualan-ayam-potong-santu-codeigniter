@@ -60,36 +60,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Berat Produk</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                gr
-                            </div>
-                        </div>
-                        <input name="weight" type="text" class="form-control nominal" value="<?= @$product ? $product->weight : ''; ?>">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Harga Produk</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                Rp.
-                            </div>
-                        </div>
-                        <input name="price" type="text" class="form-control nominal" value="<?= @$product ? $product->price : ''; ?>">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Stok</label>
-                    <input name="stock" type="text" class="form-control nominal" value="<?= @$product ? $product->stock : ''; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Satuan</label>
-                    <input name="unit" type="text" class="form-control" value="<?= @$product ? $product->unit : ''; ?>">
-                </div>
-                <div class="form-group">
                     <label>Deskripsi</label>
                     <textarea name="description" class="form-control" id="editor" cols="30" rows="10"><?= @$product ? $product->description : ''; ?></textarea>
                 </div>

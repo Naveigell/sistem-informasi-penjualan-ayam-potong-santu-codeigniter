@@ -17,6 +17,6 @@ class Product extends Model
 
     public function withCategory()
     {
-        return $this->join('product_categories', 'products.category_id = product_categories.id')->select('products.*, product_medias.*, product_categories.name AS category_name, product_categories.image AS product_categories_image');
+        return $this->join('product_categories', 'products.category_id = product_categories.id')->select('products.*, product_medias.*, product_categories.name AS category_name');
     }
 }

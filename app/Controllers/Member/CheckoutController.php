@@ -13,7 +13,7 @@ class CheckoutController extends BaseController
     public function index()
     {
         $shippingCosts = (new ShippingCost())->get()->getResultObject();
-        $carts         = (new Cart())->where('user_id', session()->get('user')->id)->withProduct()->withImages()->get()->getResultObject();
+        $carts         = (new Cart())->where('user_id', session()->get('user')->id)->withSubProduct()->withProduct()->withImages()->get()->getResultObject();
 
         return view('member/pages/checkout/index', compact('shippingCosts', 'carts'));
     }
@@ -47,26 +47,27 @@ class CheckoutController extends BaseController
         $order    = new Order();
         $shipping = new Shipping();
 
-        $cartData = (object) $cart->where('user_id', session()->get('user')->id)->withProduct()->withImages()->get()->getResultObject();
+        $cartData = (object) $cart->where('user_id', session()->get('user')->id)->withProduct()->withSubProduct()->withImages()->get()->getResultObject();
         $data     = [];
 
         foreach ($cartData as $cartDatum) {
             $data[] = [
-                "user_id"    => session()->get('user')->id,
-                "product_id" => $cartDatum->product_id,
-                "quantity"   => $cartDatum->quantity,
-                "weight"     => $cartDatum->weight,
-                "price"      => $cartDatum->price,
+                "user_id"           => session()->get('user')->id,
+                "product_id"        => $cartDatum->product_id,
+                "sub_product_id"    => $cartDatum->sub_product_id,
+                "quantity"          => $cartDatum->quantity,
+//                "weight"            => $cartDatum->sub_product_weight,
+                "sub_product_price" => $cartDatum->sub_product_price,
             ];
         }
 
         $total = array_reduce($data, function ($initial, $cart) {
-            return $initial + $cart['price'] * $cart['quantity'];
+            return $initial + $cart['sub_product_price'] * $cart['quantity'];
         }, 0);
 
-        $weight = array_reduce($data, function ($initial, $cart) {
-            return $initial + $cart['weight'] * $cart['quantity'];
-        }, 0);
+//        $weight = array_reduce($data, function ($initial, $cart) {
+//            return $initial + $cart['weight'] * $cart['quantity'];
+//        }, 0);
 
         try {
             $shipping->insert(array_merge($this->request->getVar(), [
@@ -75,7 +76,8 @@ class CheckoutController extends BaseController
                 "order_id" => uniqid(),
                 "status"   => $this->request->getVar('payment_option') == 'cod' ? Shipping::STATUS_ON_PROGRESS : Shipping::STATUS_WAITING_PAYMENT,
                 "total"    => $total,
-                "weight"   => $weight,
+//                "weight"   => $weight,
+                "weight"   => 0,
             ]));
 
             $data = array_map(function ($cart) use ($shipping) {

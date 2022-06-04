@@ -36,19 +36,7 @@ class ProductController extends BaseController
             'name' => [
                 'rules' => 'required',
             ],
-            'weight' => [
-                'rules' => 'required',
-            ],
-            'price' => [
-                'rules' => 'required',
-            ],
             'description' => [
-                'rules' => 'required',
-            ],
-            'stock' => [
-                'rules' => 'required',
-            ],
-            'unit' => [
                 'rules' => 'required',
             ],
         ];
@@ -130,19 +118,7 @@ class ProductController extends BaseController
             'name' => [
                 'rules' => 'required',
             ],
-            'weight' => [
-                'rules' => 'required',
-            ],
-            'price' => [
-                'rules' => 'required',
-            ],
             'description' => [
-                'rules' => 'required',
-            ],
-            'stock' => [
-                'rules' => 'required',
-            ],
-            'unit' => [
                 'rules' => 'required',
             ],
         ]);

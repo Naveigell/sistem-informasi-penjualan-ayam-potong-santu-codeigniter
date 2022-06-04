@@ -26,7 +26,7 @@
                 <?php foreach($orders as $order): ?>
 
                     <?php
-                        $review = (new \App\Models\Review())->where('shipping_id', $order->shipping_id)->where('product_id', $order->product_id)->where('user_id', session()->get('user')->id)->first();
+                        $review = (new \App\Models\Review())->where('shipping_id', $order->shipping_id)->where('product_id', $order->product_id)->where('sub_product_id', $order->sub_product_id)->where('user_id', session()->get('user')->id)->first();
                     ?>
 
                     <div class="row mb-4">
@@ -36,8 +36,8 @@
                         </div>
                         <div class="col-8">
                             <p><?= $order->name; ?></p>
-                            <span><?= format_number($order->price); ?></span> <br>
-                            <span>x<?= $order->quantity; ?></span> <br>
+                            <span><?= format_number($order->sub_product_price); ?></span> <br>
+                            <span>x<?= $order->quantity; ?> <br> Varian : (<?= $order->sub_product_unit; ?>)</span> <br>
                             <?php if($review): ?>
                                 <?php for ($i = 0; $i < $review['star']; $i++): ?>
                                     <i class="fa fa-star review-star star-active" style="font-size: 15px; padding: 1px; cursor: pointer;"></i>
@@ -52,7 +52,7 @@
                             <?php if($review): ?>
                                 <button class="btn btn-info">Sudah Dinilai</button>
                             <?php else: ?>
-                                <a href="<?= route_to('member.reviews.shipping.edit', $order->shipping_id, $order->product_id); ?>" class="btn btn-success">
+                                <a href="<?= route_to('member.reviews.shipping.edit', $order->shipping_id, $order->product_id, $order->sub_product_id); ?>" class="btn btn-success">
                                     Nilai
                                 </a>
                             <?php endif; ?>

@@ -9,6 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content-body') ?>
+    <?php /** @var object $subProduct */ ?>
     <?php /** @var object $product */ ?>
     <?php /** @var object $shipping */ ?>
     <?php /** @var object $order */ ?>
@@ -31,8 +32,8 @@
                              alt="">
                     </div>
                     <div class="col-8">
-                        <span><?= format_number($product->price); ?></span> <br>
-                        <span>x<?= $order->quantity; ?></span>
+                        <span><?= format_number($subProduct->price); ?></span> <br>
+                        <span>x<?= $order->quantity; ?>&nbsp;(<?= $subProduct->unit; ?>)</span>
                     </div>
                 </div>
             </div>
@@ -55,7 +56,7 @@
                             </div>
                         <?php endif; ?>
 
-                        <form action="<?= route_to('member.reviews.shipping.store', $order->shipping_id, $order->product_id); ?>" method="post">
+                        <form action="<?= route_to('member.reviews.shipping.store', $order->shipping_id, $order->product_id, $order->sub_product_id); ?>" method="post">
                             <?= csrf_field(); ?>
                             <div class="form-group">
                                 <label for="">Bintang</label> <br>

@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Shipping;
 use App\Models\ShippingHistory;
+use App\Models\SubProduct;
 
 class ShippingController extends BaseController
 {
@@ -17,13 +18,13 @@ class ShippingController extends BaseController
             "finished_date" => date('Y-m-d H:i:s'),
         ]);
 
-        $orders = (new Order())->where('shipping_id', $shippingId)->withProduct()->get()->getResultObject();
+        $orders = (new Order())->withProduct()->withImages()->withSubProduct()->where('shipping_id', $shippingId)->get()->getResultObject();
 
         foreach ($orders as $order) {
-            $product = (new Product())->where('id', $order->product_id)->first();
+            $subProduct = (new SubProduct())->where('id', $order->sub_product_id)->first();
 
-            (new Product())->update($order->product_id, [
-                "stock" => $product['stock'] - $order->quantity,
+            (new SubProduct())->update($order->sub_product_id, [
+                "stock" => $subProduct['stock'] - $order->quantity,
             ]);
         }
 

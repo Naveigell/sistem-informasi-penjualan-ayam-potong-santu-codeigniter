@@ -19,7 +19,7 @@ class ShippingController extends BaseController
 
     public function edit($shippingId)
     {
-        $orders   = (new Order())->where('shipping_id', $shippingId)->withProduct()->withImages()->get()->getResultObject();
+        $orders   = (new Order())->where('shipping_id', $shippingId)->withProduct()->withImages()->withSubProduct()->get()->getResultObject();
         $shipping = (object) (new Shipping())->withArea()->withPayment()->where('shippings.id', $shippingId)->first();
 
         return view('admin/pages/shipping/form', compact('orders', 'shipping'));

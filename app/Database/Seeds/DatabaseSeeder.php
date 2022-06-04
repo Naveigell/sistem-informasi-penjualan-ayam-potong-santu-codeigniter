@@ -9,6 +9,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $seeder = \Config\Database::seeder();
-        $seeder->call('AdminSeeder');
+        $seeder->call('UserSeeder');
+        $seeder->call('ProductCategorySeeder');
+        $seeder->call('AreaSeeder');
     }
 }

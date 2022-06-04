@@ -94,6 +94,7 @@
         <tr>
             <th>No</th>
             <th>HARGA SATUAN</th>
+            <th>VARIAN</th>
             <th>JUMLAH</th>
             <th>TOTAL</th>
             <th colspan="2">KETERANGAN</th>
@@ -105,12 +106,13 @@
         foreach($orders as $index => $order): ?>
             <tr>
                 <td align="right"><?= $index + 1; ?></td>
-                <td><?= format_number($order->price); ?></td>
+                <td><?= format_number($order->sub_product_price); ?></td>
+                <td><?= $order->sub_product_unit; ?></td>
                 <td align="right"><?= $order->quantity; ?></td>
-                <td><?= format_number($order->price * $order->quantity); ?></td>
+                <td><?= format_number($order->sub_product_price * $order->quantity); ?></td>
                 <td colspan="2"> <?= $order->name; ?></td>
             </tr>
-        <?php $total += $order->price * $order->quantity; ?>
+        <?php $total += $order->sub_product_price * $order->quantity; ?>
         <?php endforeach; ?>
         <tr>
             <th colspan="3"> TOTAL</th>

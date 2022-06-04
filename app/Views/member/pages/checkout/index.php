@@ -11,7 +11,7 @@
     <?php /** @var array $carts */ ?>
     <?php
         $total = array_reduce($carts, function ($initial, $cart) {
-            return $initial + $cart->quantity * $cart->price;
+            return $initial + $cart->quantity * $cart->sub_product_price;
         }, 0);
     ?>
 
@@ -77,8 +77,8 @@
                         <h5 class="font-weight-medium mb-3">Produk</h5>
                         <?php foreach ($carts as $cart): ?>
                             <div class="d-flex justify-content-between">
-                                <p><?= $cart->name; ?>&nbsp;x <?= $cart->quantity; ?> <?= $cart->unit; ?></p>
-                                <p><?= format_number($cart->price * $cart->quantity); ?></p>
+                                <p><?= $cart->name; ?>&nbsp;x <?= $cart->quantity; ?> (<?= $cart->sub_product_unit; ?>)</p>
+                                <p><?= format_number($cart->sub_product_price * $cart->quantity); ?></p>
                             </div>
                         <?php endforeach; ?>
                         <hr class="mt-0">
