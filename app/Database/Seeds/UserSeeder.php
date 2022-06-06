@@ -15,6 +15,8 @@ class UserSeeder extends Seeder
                 'name'     => 'admin',
                 'email'    => 'admin@gmail.com',
                 'password' => password_hash(123456, PASSWORD_DEFAULT),
+                'phone'    => '087384723',
+                'address'  => 'Jln Raya No 1',
                 'role'     => User::ROLE_ADMIN,
             ],
             [
@@ -22,6 +24,8 @@ class UserSeeder extends Seeder
                 'name'     => 'member',
                 'email'    => 'member@gmail.com',
                 'password' => password_hash(123456, PASSWORD_DEFAULT),
+                'phone'    => '083499134',
+                'address'  => 'Jln Raya No 2',
                 'role'     => User::ROLE_USER,
             ],
             [
@@ -29,6 +33,8 @@ class UserSeeder extends Seeder
                 'name'     => 'member123',
                 'email'    => 'member123@gmail.com',
                 'password' => password_hash(123456, PASSWORD_DEFAULT),
+                'phone'    => '084487341325',
+                'address'  => 'Jln Raya No 3',
                 'role'     => User::ROLE_USER,
             ],
         ];

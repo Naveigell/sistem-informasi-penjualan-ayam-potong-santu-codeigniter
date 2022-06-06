@@ -34,7 +34,7 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="text" class="form-control" name="username" placeholder="Your Name" aria-invalid="false">
+                            <input type="text" class="form-control" name="username" placeholder="Your Username" aria-invalid="false">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
@@ -43,6 +43,14 @@
                         </div>
                         <div class="control-group">
                             <input type="password" class="form-control" name="password" placeholder="Your Password">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="phone" placeholder="Your Phone">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="address" placeholder="Your Address">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>

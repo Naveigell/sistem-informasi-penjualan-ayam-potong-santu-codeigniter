@@ -42,7 +42,12 @@ class Home extends BaseController
             return $review->star;
         }, $reviews);
 
-        $totalReviews    = array_sum($totalReviews);
+        $totalReviews = array_sum($totalReviews);
+
+        if ($totalReviews <= 0) {
+            return 0;
+        }
+
         $maxReviewsValue = count($reviews) * 5;
 
         return 5 - (5 * ($maxReviewsValue - $totalReviews) / $maxReviewsValue);

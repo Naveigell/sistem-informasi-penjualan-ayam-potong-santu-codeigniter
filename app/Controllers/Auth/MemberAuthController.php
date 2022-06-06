@@ -68,6 +68,12 @@ class MemberAuthController extends BaseController
             'password' => [
                 'rules' => 'required',
             ],
+            'phone' => [
+                'rules' => 'required',
+            ],
+            'address' => [
+                'rules' => 'required',
+            ],
         ]);
 
         if (!$validator->run($this->request->getVar())) {
@@ -88,6 +94,8 @@ class MemberAuthController extends BaseController
                 'username' => $this->request->getVar('username'),
                 'email'    => $this->request->getVar('email'),
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'phone'    => $this->request->getVar('phone'),
+                'address'  => $this->request->getVar('address'),
                 'role'     => User::ROLE_USER,
             ]);
         } catch (\ReflectionException $e) {

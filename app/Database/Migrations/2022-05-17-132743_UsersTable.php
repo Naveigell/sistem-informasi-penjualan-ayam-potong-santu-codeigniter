@@ -32,6 +32,14 @@ class UsersTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'phone' => [
+                'type' => 'VARCHAR',
+                'constraint' => 35,
+            ],
+            'address' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'role' => [
                 'type' => 'VARCHAR',
                 'constraint' => 30,

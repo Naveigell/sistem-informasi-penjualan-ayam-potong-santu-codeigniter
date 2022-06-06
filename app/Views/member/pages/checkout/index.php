@@ -42,11 +42,11 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Address</label>
-                            <input name="address" class="form-control" type="text" placeholder="Your Address ...">
+                            <input name="address" value="<?= session()->get('user')->address; ?>" class="form-control" type="text" placeholder="Your Address ...">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Phone</label>
-                            <input name="phone" class="form-control" type="text" placeholder="Your Phone ...">
+                            <input name="phone" value="<?= session()->get('user')->phone; ?>" class="form-control" type="text" placeholder="Your Phone ...">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Pilihan Pembayaran</label>

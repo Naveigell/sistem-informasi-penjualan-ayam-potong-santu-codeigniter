@@ -11,5 +11,5 @@ class User extends Model
 
     protected $table = 'users';
 
-    protected $allowedFields = ['name', 'username', 'email', 'password', 'role'];
+    protected $allowedFields = ['name', 'username', 'email', 'password', 'phone', 'address', 'role'];
 }
