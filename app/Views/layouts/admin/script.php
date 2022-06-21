@@ -28,4 +28,6 @@
         digits: 0,
         removeMaskOnSubmit: true,
     });
+
+    $(".main-sidebar").niceScroll();
 </script>
