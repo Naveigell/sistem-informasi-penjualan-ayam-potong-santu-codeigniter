@@ -158,7 +158,11 @@
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3" type="submit" <?= !session()->has('hasLoggedIn') ? 'disabled' : '' ?>><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    <?php if (!session()->has('hasLoggedIn')): ?>
+                        <a href="<?= route_to('member.auth.register.index') . '?' . http_build_query(['text' => 'true']); ?>" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
+                    <?php else: ?>
+                        <button class="btn btn-primary px-3" type="submit"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    <?php endif; ?>
                 </form>
                 <?php if (!session()->has('hasLoggedIn')): ?>
                     <span class="text text-danger">Login dahulu jika ingin menambahkan ke dalam keranjang!</span>

@@ -20,12 +20,16 @@
                 <span class="badge"><?= $totalCarts; ?></span>
             </a>
             <?php if (session()->has('hasLoggedIn')): ?>
-                <a href="<?= route_to('member.payments.index'); ?>" class="btn border">
+                <a class="btn border">
                     <span class="badge"><?= session()->get('user')->email; ?></span>
                 </a>
                 <a href="<?= route_to('member.suggestions.index'); ?>" class="btn border">
                     <i class="fas fa-envelope text-primary"></i>
                     <span class="badge">Saran</span>
+                </a>
+                <a href="<?= route_to('member.payments.index'); ?>" class="btn border">
+                    <i class="fas fa-truck text-primary"></i>
+                    <span class="badge">Pengiriman</span>
                 </a>
                 <a href="<?= route_to('member.chats.index'); ?>" class="btn border">
                     <i class="fas fa-comment text-primary"></i>
@@ -40,10 +44,10 @@
                     <i class="fa fa-sign-in-alt text-primary"></i>
                     <span class="badge">Login</span>
                 </a>
-                <a href="<?= route_to('member.auth.register.index'); ?>" class="btn border">
-                    <i class="fa fa-door-open text-primary"></i>
-                    <span class="badge">Register</span>
-                </a>
+<!--                <a href="--><?//= route_to('member.auth.register.index'); ?><!--" class="btn border">-->
+<!--                    <i class="fa fa-door-open text-primary"></i>-->
+<!--                    <span class="badge">Register</span>-->
+<!--                </a>-->
             <?php endif; ?>
         </div>
     </div>

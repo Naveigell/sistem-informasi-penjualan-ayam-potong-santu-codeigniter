@@ -41,7 +41,7 @@
                 </div>
             </form>
             <div class="table-responsive">
-                <table class="table" id="table-2">
+                <table class="table table-bordered" id="table-2">
                     <thead>
                         <tr>
                             <th></th>

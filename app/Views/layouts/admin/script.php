@@ -30,4 +30,6 @@
     });
 
     $(".main-sidebar").niceScroll();
+    // $(".dropdown-list-icons").niceScroll();
+    $(".dropdown-menu-right").niceScroll();
 </script>

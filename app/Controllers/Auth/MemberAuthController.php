@@ -77,7 +77,7 @@ class MemberAuthController extends BaseController
         ]);
 
         if (!$validator->run($this->request->getVar())) {
-            return redirect()->back()->withInput()->with('errors', $validator->getErrors());
+            return redirect()->route('member.auth.register.index')->withInput()->with('errors', $validator->getErrors());
         }
 
         $user = (new User())->where('email', $this->request->getVar('email'))->first();

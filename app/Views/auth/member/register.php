@@ -27,6 +27,12 @@
                         </div>
                     <?php endif; ?>
 
+                    <?php if (array_key_exists('text', $_GET)): ?>
+                        <div class="alert-danger alert">
+                            Anda belum memiliki akun, registrasi terlebih dahulu agar anda dapat melakukan login.
+                        </div>
+                    <?php endif; ?>
+
                     <form novalidate="novalidate" action="<?= route_to('member.auth.register.store'); ?>" method="post">
                         <?= csrf_field(); ?>
                         <div class="control-group">
