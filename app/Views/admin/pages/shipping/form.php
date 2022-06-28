@@ -20,9 +20,14 @@
         </div>
         <div class="card-body">
             <?php foreach ($orders as $order): ?>
+
+                <?php
+                    $media = (new \App\Models\ProductMedia())->where('product_id', $order->product_id)->where('type', \App\Models\ProductMedia::TYPE_IMAGE)->first();
+                ?>
+
                 <div class="row mb-4">
                     <div class="col-2">
-                        <img style="width: 100px; height: 100px;" src="<?= base_url('/uploads/images/products/' . $order->media); ?>" alt="">
+                        <img style="width: 100px; height: 100px;" src="<?= base_url('/uploads/images/products/' . $media['media']); ?>" alt="">
                     </div>
                     <div class="col-8">
                         <p><?= $order->name; ?></p>

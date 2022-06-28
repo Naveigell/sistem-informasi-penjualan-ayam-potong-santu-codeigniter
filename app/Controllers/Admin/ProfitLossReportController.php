@@ -76,7 +76,10 @@ class ProfitLossReportController extends BaseController
 
         $temporaryOrders = [];
 
-        $orders = (new Order())->withProduct()->withSubProduct()->withImages()->whereIn('shipping_id', count($shippingsIds) > 0 ? $shippingsIds : [''])->get()->getResultObject();
+        $orders = (new Order())->join('products', 'products.id = orders.product_id')->select('products.*, products.id AS product_id, orders.*,
+                                       sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                       sub_products.unit AS sub_product_unit,
+                                       sub_products.id AS sub_product_id')->withSubProduct()->whereIn('shipping_id', count($shippingsIds) > 0 ? $shippingsIds : [''])->get()->getResultObject();
 
         array_map(function ($order) use (&$temporaryOrders) {
             if (!array_key_exists($order->id, $temporaryOrders)) {

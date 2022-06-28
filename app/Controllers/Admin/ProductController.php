@@ -12,7 +12,7 @@ class ProductController extends BaseController
 {
     public function index()
     {
-        $products = (new Product())->withImages()->withCategory()->get()->getResultObject();
+        $products = (new Product())->get()->getResultObject();
 
         return view('admin/pages/product/index', compact('products'));
     }
@@ -104,16 +104,13 @@ class ProductController extends BaseController
 
     public function store()
     {
-        $validator = \Config\Services::validation();
-        $validator->setRules([
+        $video = $this->request->getFile('video');
+        $rules = [
             'category_id' => [
                 'rules' => 'required',
             ],
             'image' => [
                 'rules' => 'uploaded[image]|mime_in[image,image/png,image/jpg,image/jpeg]',
-            ],
-            'video' => [
-                'rules' => 'uploaded[video]',
             ],
             'name' => [
                 'rules' => 'required',
@@ -121,7 +118,16 @@ class ProductController extends BaseController
             'description' => [
                 'rules' => 'required',
             ],
-        ]);
+        ];
+
+        if ($video->isFile()) {
+            $rules['video'] = [
+                'rules' => 'uploaded[video]',
+            ];
+        }
+
+        $validator = \Config\Services::validation();
+        $validator->setRules($rules);
 
         if (!$validator->run($this->request->getVar())) {
             return redirect()->back()->withInput()->with('errors', $validator->getErrors());
@@ -132,11 +138,6 @@ class ProductController extends BaseController
 
         $image->move(ROOTPATH . 'public/uploads/images/products', $imageName);
 
-        $video     = $this->request->getFile('video');
-        $videoName = str_random(40) . '.' . $video->getClientExtension();
-
-        $video->move(ROOTPATH . 'public/uploads/videos/products', $videoName);
-
         $product = new Product();
         $media   = new ProductMedia();
 
@@ -146,17 +147,33 @@ class ProductController extends BaseController
                 "slug" => str_slug($this->request->getVar('name')),
             ]));
 
+            $videoData = [
+                "product_id" => $product->getInsertID(),
+                "media"      => '',
+                "type"       => ProductMedia::TYPE_VIDEO,
+            ];
+
+            if ($video->isFile()) {
+
+                $video     = $this->request->getFile('video');
+                $videoName = str_random(40) . '.' . $video->getClientExtension();
+
+                $video->move(ROOTPATH . 'public/uploads/videos/products', $videoName);
+
+                $videoData = [
+                    "product_id" => $product->getInsertID(),
+                    "media"      => $videoName,
+                    "type"       => ProductMedia::TYPE_VIDEO,
+                ];
+            }
+
             $media->insertBatch([
                 [
                     "product_id" => $product->getInsertID(),
                     "media"      => $imageName,
                     "type"       => ProductMedia::TYPE_IMAGE,
                 ],
-                [
-                    "product_id" => $product->getInsertID(),
-                    "media"      => $videoName,
-                    "type"       => ProductMedia::TYPE_VIDEO,
-                ],
+                $videoData,
             ]);
 
         } catch (\ReflectionException $e) {

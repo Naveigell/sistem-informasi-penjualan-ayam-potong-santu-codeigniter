@@ -40,6 +40,13 @@ $routes->group('admin', ['filter' => 'adminfilter'], function ($routes) {
     $routes->get('chats/(:num)', 'Admin\ChatController::show/$1', ["as" => "admin.chats.show"]);
     $routes->post('chats/(:num)', 'Admin\ChatController::store/$1', ["as" => "admin.chats.store"]);
 
+    $routes->get('products/(:num)/medias', 'Admin\ProductMediaController::index/$1', ["as" => "admin.product-medias.index"]);
+    $routes->post('products/(:num)/medias', 'Admin\ProductMediaController::store/$1', ["as" => "admin.product-medias.store"]);
+    $routes->get('products/(:num)/medias/create', 'Admin\ProductMediaController::create/$1', ["as" => "admin.product-medias.create"]);
+    $routes->get('products/(:num)/medias/(:num)/edit', 'Admin\ProductMediaController::edit/$1/$2', ["as" => "admin.product-medias.edit"]);
+    $routes->put('products/(:num)/medias/(:num)', 'Admin\ProductMediaController::update/$1/$2', ["as" => "admin.product-medias.update"]);
+    $routes->delete('products/(:num)/medias/(:num)', 'Admin\ProductMediaController::destroy/$1/$2', ["as" => "admin.product-medias.destroy"]);
+
     $routes->get('products/(:num)/subs', 'Admin\SubProductController::index/$1', ["as" => "admin.sub-products.index"]);
     $routes->post('products/(:num)/subs', 'Admin\SubProductController::store/$1', ["as" => "admin.sub-products.store"]);
     $routes->get('products/create/(:num)/subs', 'Admin\SubProductController::create/$1', ["as" => "admin.sub-products.create"]);

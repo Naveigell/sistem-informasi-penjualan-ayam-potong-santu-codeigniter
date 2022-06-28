@@ -9,7 +9,12 @@ class CartController extends BaseController
 {
     public function index()
     {
-        $carts = (new Cart())->withProduct()->withImages()->withSubProduct()->get()->getResultObject();
+        $carts = (new Cart())->where('user_id', session()->get('user')->id)
+                            ->join('products', 'products.id = carts.product_id')
+                            ->select('products.*, products.id AS product_id, carts.*, 
+                                   sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                   sub_products.unit AS sub_product_unit,
+                                   sub_products.id AS sub_product_id')->withSubProduct()->get()->getResultObject();
 
         return view('member/pages/cart/index', compact('carts'));
     }

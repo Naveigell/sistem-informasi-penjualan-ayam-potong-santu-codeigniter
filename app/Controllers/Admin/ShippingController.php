@@ -19,7 +19,12 @@ class ShippingController extends BaseController
 
     public function edit($shippingId)
     {
-        $orders   = (new Order())->where('shipping_id', $shippingId)->withProduct()->withImages()->withSubProduct()->get()->getResultObject();
+        $orders   = (new Order())->where('shipping_id', $shippingId)
+                                 ->join('products', 'products.id = orders.product_id')
+                                 ->select('products.*, products.id AS product_id, orders.*, 
+                                                sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                                sub_products.unit AS sub_product_unit,
+                                                sub_products.id AS sub_product_id')->withSubProduct()->get()->getResultObject();
         $shipping = (object) (new Shipping())->withArea()->withPayment()->where('shippings.id', $shippingId)->first();
 
         (new Shipping())->update($shippingId, [

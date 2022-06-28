@@ -77,7 +77,11 @@ class PaymentController extends BaseController
 
     public function nota($shippingId)
     {
-        $orders   = (new Order())->withProduct()->withSubProduct()->withImages()->where('shipping_id', $shippingId)->get()->getResultObject();
+        $orders   = (new Order())->join('products', 'products.id = orders.product_id')
+                                 ->select('products.*, products.id AS product_id, orders.*, 
+                                       sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                       sub_products.unit AS sub_product_unit,
+                                       sub_products.id AS sub_product_id')->withSubProduct()->where('shipping_id', $shippingId)->get()->getResultObject();
         $shipping = (new Shipping())->where('id', $shippingId)->first();
         $user     = (new User())->where('id', $shipping['user_id'])->first();
         $area     = (new ShippingCost())->where('id', $shipping['area_id'])->first();

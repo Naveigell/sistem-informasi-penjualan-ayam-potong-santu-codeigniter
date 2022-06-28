@@ -36,6 +36,10 @@
                         <?php foreach($medias as $index => $media): ?>
                             <?php if($media->type == \App\Models\ProductMedia::TYPE_VIDEO): ?>
 
+                                <?php if (!$media->media): ?>
+                                    <?php continue; ?>
+                                <?php endif; ?>
+
                                 <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?>">
                                     <video controls width="100%" height="100%" style="cursor: pointer;">
                                         <source src="<?= base_url('/uploads/videos/products/' . $media->media); ?>" type="video/mp4">

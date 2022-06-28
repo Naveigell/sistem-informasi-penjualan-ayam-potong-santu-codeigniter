@@ -18,7 +18,7 @@ class Home extends BaseController
     public function category($slug)
     {
         $category = (object) (new ProductCategory())->where('slug', $slug)->first();
-        $products = (object) (new Product())->where('category_id', $category->id)->withImages()->get()->getResultObject();
+        $products = (object) (new Product())->where('category_id', $category->id)->get()->getResultObject();
 
         return view('category', compact('products', 'category'));
     }

@@ -18,7 +18,10 @@ class ShippingController extends BaseController
             "finished_date" => date('Y-m-d H:i:s'),
         ]);
 
-        $orders = (new Order())->withProduct()->withImages()->withSubProduct()->where('shipping_id', $shippingId)->get()->getResultObject();
+        $orders = (new Order())->join('products', 'products.id = orders.product_id')->select('products.*, products.id AS product_id, orders.*,
+                                       sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                       sub_products.unit AS sub_product_unit,
+                                       sub_products.id AS sub_product_id')->withSubProduct()->where('shipping_id', $shippingId)->get()->getResultObject();
 
         foreach ($orders as $order) {
             $subProduct = (new SubProduct())->where('id', $order->sub_product_id)->first();

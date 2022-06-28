@@ -27,11 +27,12 @@
 
                     <?php
                         $review = (new \App\Models\Review())->where('shipping_id', $order->shipping_id)->where('product_id', $order->product_id)->where('sub_product_id', $order->sub_product_id)->where('user_id', session()->get('user')->id)->first();
+                    $media = (new \App\Models\ProductMedia())->where('product_id', $order->product_id)->where('type', \App\Models\ProductMedia::TYPE_IMAGE)->first();
                     ?>
 
                     <div class="row mb-4">
                         <div class="col-2">
-                            <img style="width: 100px; height: 100px;" src="<?= base_url('/uploads/images/products/' . $order->media); ?>"
+                            <img style="width: 100px; height: 100px;" src="<?= base_url('/uploads/images/products/' . $media['media']); ?>"
                                  alt="">
                         </div>
                         <div class="col-8">

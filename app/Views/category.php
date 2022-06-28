@@ -6,10 +6,15 @@
         <div class="row px-xl-5 pb-3">
             <?php /** @var array $products */
             foreach ($products as $product): ?>
+
+                <?php
+                    $media = (new \App\Models\ProductMedia())->where('product_id', $product->id)->where('type', \App\Models\ProductMedia::TYPE_IMAGE)->first();
+                ?>
+
                 <div class="col-lg-4 col-md-6 pb-1">
                     <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                         <a href="<?= route_to('member.home.detail', $category->slug, $product->slug); ?>" class="cat-img position-relative overflow-hidden mb-3">
-                            <img class="img-fluid" src="<?= base_url('/uploads/images/products/' . $product->media); ?>" alt="">
+                            <img class="img-fluid" src="<?= base_url('/uploads/images/products/' . $media['media']); ?>" alt="">
                         </a>
                         <h5 class="font-weight-semi-bold m-0"><?= $product->name; ?></h5>
                     </div>

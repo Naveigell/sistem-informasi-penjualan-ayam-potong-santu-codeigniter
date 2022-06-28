@@ -13,7 +13,11 @@ class ReviewController extends BaseController
 {
     public function index($shippingId)
     {
-        $orders = (new Order())->withProduct()->withImages()->withSubProduct()->where('shipping_id', $shippingId)->get()->getResultObject();
+        $orders = (new Order())->join('products', 'products.id = orders.product_id')
+                                ->select('products.*, products.id AS product_id, orders.*,
+                                       sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                       sub_products.unit AS sub_product_unit,
+                                       sub_products.id AS sub_product_id')->withSubProduct()->where('shipping_id', $shippingId)->get()->getResultObject();
 
         return view('member/pages/review/index', compact('orders'));
     }

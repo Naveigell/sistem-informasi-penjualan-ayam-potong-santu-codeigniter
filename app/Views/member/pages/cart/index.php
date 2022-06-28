@@ -29,8 +29,13 @@
                 </thead>
                 <tbody class="align-middle">
                     <?php foreach ($carts as $cart): ?>
+
+                        <?php
+                            $media = (new \App\Models\ProductMedia())->where('product_id', $cart->product_id)->where('type', \App\Models\ProductMedia::TYPE_IMAGE)->first();
+                        ?>
+
                         <tr>
-                            <td class="align-middle"><img src="<?= base_url('/uploads/images/products/' . $cart->media); ?>" alt="" style="width: 50px;"> <?= $cart->name; ?></td>
+                            <td class="align-middle"><img src="<?= base_url('/uploads/images/products/' . $media['media']); ?>" alt="" style="width: 50px;"> <?= $cart->name; ?></td>
                             <td class="align-middle"><?= format_number($cart->sub_product_price); ?></td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">

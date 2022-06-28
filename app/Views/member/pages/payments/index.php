@@ -13,7 +13,11 @@
         <?php foreach ($shippings as $shipping): ?>
 
             <?php
-                $products = (new \App\Models\Order())->withProduct()->withSubProduct()->withImages()->where('shipping_id', $shipping->id)->get()->getResultObject();
+                $products = (new \App\Models\Order())->join('products', 'products.id = orders.product_id')
+                                    ->select('products.*, products.id AS product_id, orders.*,
+                                       sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                       sub_products.unit AS sub_product_unit,
+                                       sub_products.id AS sub_product_id')->withSubProduct()->where('shipping_id', $shipping->id)->get()->getResultObject();
                 $area     = (new \App\Models\ShippingCost())->where('id', $shipping->area_id)->first();
                 $payment  = (new \App\Models\Payment())->where('shipping_id', $shipping->id)->first();
                 $total    = 0;
@@ -83,9 +87,14 @@
                 </div>
                 <div class="card-body">
                     <?php foreach ($products as $product): ?>
+
+                        <?php
+                            $media = (new \App\Models\ProductMedia())->where('product_id', $product->product_id)->where('type', \App\Models\ProductMedia::TYPE_IMAGE)->first();
+                        ?>
+
                         <div class="row mb-4">
                             <div class="col-2">
-                                <img style="width: 100px; height: 100px;" src="<?= base_url('/uploads/images/products/' . $product->media); ?>"
+                                <img style="width: 100px; height: 100px;" src="<?= base_url('/uploads/images/products/' . $media['media']); ?>"
                                      alt="">
                             </div>
                             <div class="col-8">

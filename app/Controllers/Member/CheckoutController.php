@@ -13,7 +13,12 @@ class CheckoutController extends BaseController
     public function index()
     {
         $shippingCosts = (new ShippingCost())->get()->getResultObject();
-        $carts         = (new Cart())->where('user_id', session()->get('user')->id)->withSubProduct()->withProduct()->withImages()->get()->getResultObject();
+        $carts         = (new Cart())->where('user_id', session()->get('user')->id)->withSubProduct()
+                                    ->join('products', 'products.id = carts.product_id')
+                                    ->select('products.*, products.id AS product_id, carts.*, 
+                                       sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                       sub_products.unit AS sub_product_unit,
+                                       sub_products.id AS sub_product_id')->get()->getResultObject();
 
         return view('member/pages/checkout/index', compact('shippingCosts', 'carts'));
     }
@@ -47,7 +52,12 @@ class CheckoutController extends BaseController
         $order    = new Order();
         $shipping = new Shipping();
 
-        $cartData = (object) $cart->where('user_id', session()->get('user')->id)->withProduct()->withSubProduct()->withImages()->get()->getResultObject();
+        $cartData = (object) $cart->where('user_id', session()->get('user')->id)
+                                    ->join('products', 'products.id = carts.product_id')
+                                    ->select('products.*, products.id AS product_id, carts.*, 
+                                       sub_products.price AS sub_product_price, sub_products.stock AS sub_product_stock, 
+                                       sub_products.unit AS sub_product_unit,
+                                       sub_products.id AS sub_product_id')->withSubProduct()->get()->getResultObject();
         $data     = [];
 
         foreach ($cartData as $cartDatum) {
