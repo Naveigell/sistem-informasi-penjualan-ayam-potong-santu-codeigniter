@@ -41,23 +41,30 @@
             </nav>
             <div id="header-carousel" class="carousel slide mt-3" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active" style="height: 410px;">
-                        <img class="img-fluid" src="img/carousel-1.jpg" alt="Image">
+                    <div class="carousel-item active" style="height: 700px;">
+                        <img class="img-fluid" src="<?= base_url('member/img/banner1.jpeg'); ?>" alt="Image" style="object-fit: fill">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="p-3" style="max-width: 700px;">
-                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Ayam Potong Santu Adalah</h3>
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                            <div class="p-3" style="">
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">~ Ayam Potong Santu ~</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Usaha yang bergerak dibidang penjualan ayam potong di daerah Ubud, Gianyar, Bali.</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" style="height: 410px;">
-                        <img class="img-fluid" src="img/carousel-2.jpg" alt="Image">
+                    <div class="carousel-item" style="height: 700px;">
+                        <img class="img-fluid" src="<?= base_url('member/img/banner2.jpeg'); ?>" alt="Image" style="object-fit: fill">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="p-3" style="max-width: 700px;">
-                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Berlokasi Di Gianyar</h3>
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                            <div class="p-3" style="">
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">~ Ayam Potong Santu ~</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Menjual berbagai ayam potong seperti ayam broiler dan bumbu.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height: 700px;">
+                        <img class="img-fluid" src="<?= base_url('member/img/banner3.jpeg'); ?>" alt="Image" style="object-fit: fill">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="">
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">~ Ayam Potong Santu ~</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Usaha ini berjalan hampir 20 tahun lebih.</h3>
                             </div>
                         </div>
                     </div>
