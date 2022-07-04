@@ -1,3 +1,6 @@
+<?php
+    $shippings = (new \App\Models\Shipping())->where('has_read', 0)->get()->getResultObject();
+?>
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -16,7 +19,14 @@
             <li><a class="nav-link" href="<?= route_to('admin.products.index'); ?>"><i class="fa fa-shopping-bag"></i> <span>Produk</span></a></li>
             <li><a class="nav-link" href="<?= route_to('admin.shipping-costs.index'); ?>"><i class="fa fa-box"></i> <span>Area Pengiriman</span></a></li>
             <li class="menu-header">Pemesanan</li>
-            <li><a class="nav-link" href="<?= route_to('admin.shippings.index'); ?>"><i class="fa fa-truck"></i> <span>Pengiriman</span></a></li>
+            <li class="position-relative">
+                <a class="nav-link" href="<?= route_to('admin.shippings.index'); ?>">
+                    <i class="fa fa-truck"></i> <span>Pengiriman </span>
+                </a>
+                <?php if (count($shippings) > 0): ?>
+                    <span class="badge badge-primary d-inline-block position-absolute" style="right: 20%; top: 25%;"><?= count($shippings); ?></span>
+                <?php endif; ?>
+            </li>
             <li class="menu-header">Saran</li>
             <li><a class="nav-link" href="<?= route_to('admin.suggestions.index'); ?>"><i class="fa fa-envelope"></i> <span>Saran</span></a></li>
             <li class="menu-header">Keuangan</li>

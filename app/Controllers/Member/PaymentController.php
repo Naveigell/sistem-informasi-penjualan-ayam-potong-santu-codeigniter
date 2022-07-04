@@ -66,7 +66,9 @@ class PaymentController extends BaseController
             ]));
 
             (new Shipping())->update($shippingId, [
-                "status" => Shipping::STATUS_ON_PROGRESS,
+                "status"        => Shipping::STATUS_ON_PROGRESS,
+                "has_read"      => 0,
+                "user_has_read" => 1,
             ]);
         } catch (\ReflectionException $e) {
             var_dump($e->getMessage());

@@ -16,6 +16,8 @@ class ShippingController extends BaseController
         (new Shipping())->update($shippingId, [
             "finished"      => 1,
             "finished_date" => date('Y-m-d H:i:s'),
+            "has_read"      => 0,
+            "user_has_read" => 1,
         ]);
 
         $orders = (new Order())->join('products', 'products.id = orders.product_id')->select('products.*, products.id AS product_id, orders.*,
@@ -39,6 +41,19 @@ class ShippingController extends BaseController
         $shipping  = (object) (new Shipping())->where('id', $shippingId)->first();
         $histories = (new ShippingHistory())->where('shipping_id', $shippingId)->get()->getResultObject();
 
+        (new Shipping())->update($shippingId, [
+            "user_has_read" => 1,
+        ]);
+
         return view('member/pages/shipping/timeline', compact('histories', 'shipping'));
+    }
+
+    public function notification($shippingId)
+    {
+        (new Shipping())->update($shippingId, [
+            "user_has_read" => 1,
+        ]);
+
+        return redirect()->route('member.payments.index')->withInput()->with('success', 'Notifikasi dimatikan');
     }
 }

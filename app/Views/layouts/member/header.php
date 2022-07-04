@@ -6,6 +6,10 @@
     }
 ?>
 
+<?php
+    $shippings = (new \App\Models\Shipping())->where('user_has_read', 0)->get()->getResultObject();
+?>
+
 <!-- Topbar Start -->
 <div class="container-fluid">
     <div class="row align-items-center py-3 px-xl-5">
@@ -29,7 +33,13 @@
                 </a>
                 <a href="<?= route_to('member.payments.index'); ?>" class="btn border">
                     <i class="fas fa-truck text-primary"></i>
-                    <span class="badge">Pengiriman</span>
+                    <span class="badge">
+                        Pengiriman &nbsp;&nbsp;&nbsp;
+
+                        <?php if (count($shippings) > 0): ?>
+                            <span class="badge badge-primary" style="font-size: 12px;"><?= count($shippings); ?></span>
+                        <?php endif; ?>
+                    </span>
                 </a>
                 <a href="<?= route_to('member.chats.index'); ?>" class="btn border">
                     <i class="fas fa-comment text-primary"></i>

@@ -27,9 +27,12 @@ class ShippingController extends BaseController
                                                 sub_products.id AS sub_product_id')->withSubProduct()->get()->getResultObject();
         $shipping = (object) (new Shipping())->withArea()->withPayment()->where('shippings.id', $shippingId)->first();
 
-        (new Shipping())->update($shippingId, [
-            "has_read" => 1,
-        ]);
+        // if shipping has finished
+        if ($shipping->finished_date) {
+            (new Shipping())->update($shippingId, [
+                "has_read" => 1,
+            ]);
+        }
 
         return view('admin/pages/shipping/form', compact('orders', 'shipping'));
     }
@@ -43,7 +46,9 @@ class ShippingController extends BaseController
         ]);
 
         (new Shipping())->update($shippingId, [
-            "status" => Shipping::STATUS_ON_PROGRESS,
+            "status"        => Shipping::STATUS_ON_PROGRESS,
+            "has_read"      => 1,
+            "user_has_read" => 0,
         ]);
 
         return redirect()->route('admin.shippings.index')->withInput()->with('success', 'Validitas berhasil diubah');
@@ -67,6 +72,11 @@ class ShippingController extends BaseController
             "description"   => $this->request->getVar('status'),
             "index_id"      => $this->request->getVar('index') ? $this->request->getVar('index') : 0,
             "progress_date" => date('Y-m-d H:i:s'),
+        ]);
+
+        (new Shipping())->update($shippingId, [
+            "has_read"      => 1,
+            "user_has_read" => 0,
         ]);
 
         return redirect()->route('admin.shippings.index')->withInput()->with('success', 'Berhasil mengubah status produk');

@@ -31,7 +31,7 @@ Shippings
                         $history = (new \App\Models\ShippingHistory())->where('shipping_id', $shipping->shipping_id)->orderBy('id', 'desc')->first();
                     ?>
 
-                    <tr>
+                    <tr <?php if (!$shipping->has_read): ?> style="background: #eeecec;" <?php endif; ?>>
                         <td><?= $shipping->name; ?></td>
                         <td><?= $shipping->address; ?></td>
                         <td><span class="badge badge-primary"><?= str_replace('_', ' ', $shipping->payment_option); ?></span></td>

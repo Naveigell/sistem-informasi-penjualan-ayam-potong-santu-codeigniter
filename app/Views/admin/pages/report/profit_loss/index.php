@@ -15,6 +15,12 @@
         ];
     ?>
 
+    <style>
+        #table-2 td {
+            border: 1px solid #c1c1c1;
+        }
+    </style>
+
     <div class="card">
         <div class="card-header">
             <h4 class="d-inline">Laporan</h4>
@@ -40,8 +46,8 @@
                     </div>
                 </div>
             </form>
-            <div class="table-responsive">
-                <table class="table table-bordered" id="table-2">
+            <div class="table-responsive row d-flex justify-content-center font-weight-bold">
+                <table class="table table-bordered col-6" id="table-2">
                     <thead>
                         <tr>
                             <th></th>

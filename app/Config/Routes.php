@@ -135,6 +135,7 @@ $routes->group('member', function ($routes) {
 
     $routes->get('shippings/(:num)/timeline', 'Member\ShippingController::timeline/$1', ["as" => "member.shippings.timeline"]);
     $routes->put('shippings/(:num)/finish', 'Member\ShippingController::finish/$1', ["as" => "member.shippings.finish"]);
+    $routes->put('shippings/(:num)/notification', 'Member\ShippingController::notification/$1', ["as" => "member.shippings.notification"]);
 
     $routes->get('reviews/(:num)', 'Member\ReviewController::index/$1', ["as" => "member.reviews.index"]);
     $routes->get('reviews/(:num)/product/(:num)/sub/(:num)', 'Member\ReviewController::edit/$1/$2/$3', ["as" => "member.reviews.shipping.edit"]);

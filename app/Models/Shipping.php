@@ -13,8 +13,8 @@ class Shipping extends Model
 
     protected $allowedFields = [
         'user_id', 'area_id', 'order_id', 'name', 'email', 'address', 'phone', 'total', 'weight', 'payment_option',
-        'status', 'finished', 'finished_date', 'has_read',
-        ];
+        'status', 'finished', 'finished_date', 'has_read', 'user_has_read',
+    ];
 
     public function withUser()
     {

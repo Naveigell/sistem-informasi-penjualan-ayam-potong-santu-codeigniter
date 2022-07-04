@@ -39,51 +39,44 @@
                         <?php endif; ?>
                     </h6>
 
-                    <?php if ($payment): ?>
-                        <?php if($payment['status'] == \App\Models\Payment::STATUS_INVALID): ?>
-                            <div class="card-header-action text-right">
+                    <div class="card-header-action text-right">
+                        <?php if (!$shipping->user_has_read): ?>
+                            <button data-target="#notificationModal" data-toggle="modal" class="btn btn-primary notification-button" data-url="<?= route_to('member.shippings.notification', $shipping->id); ?>"><i class="fa fa-bell"></i></button>
+                        <?php endif; ?>
+                        <?php if ($payment): ?>
+                            <?php if($payment['status'] == \App\Models\Payment::STATUS_INVALID): ?>
                                 <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
                                 <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
-                            </div>
-                        <?php elseif ($shipping->status == \App\Models\Shipping::STATUS_ON_PROGRESS): ?>
-                            <?php if($shipping->finished): ?>
-                                <div class="card-header-action text-right">
+                            <?php elseif ($shipping->status == \App\Models\Shipping::STATUS_ON_PROGRESS): ?>
+                                <?php if($shipping->finished): ?>
                                     <button class="btn btn-success">Pesanan Selesai</button>
                                     <a href="<?= route_to('member.reviews.index', $shipping->id); ?>" class="btn btn-warning">Penilaian</a>
                                     <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
-                                </div>
-                            <?php else: ?>
-                                <div class="card-header-action text-right">
+                                <?php else: ?>
                                     <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
                                     <?php if($payment['status'] == \App\Models\Payment::STATUS_VALID): ?>
                                         <button data-url="<?= route_to('member.shippings.finish', $shipping->id); ?>" data-target="#finishModal" data-toggle="modal" class="btn btn-success btn-finish">Selesaikan Pesanan</button>
                                     <?php endif; ?>
                                     <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
-                                </div>
+                                <?php endif; ?>
                             <?php endif; ?>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <?php if($shipping->payment_option == \App\Models\Payment::PAYMENT_COD): ?>
-                            <?php if($shipping->finished): ?>
-                                <div class="card-header-action text-right">
+                        <?php else: ?>
+                            <?php if($shipping->payment_option == \App\Models\Payment::PAYMENT_COD): ?>
+                                <?php if($shipping->finished): ?>
                                     <button class="btn btn-success">Pesanan Selesai</button>
                                     <a href="<?= route_to('member.reviews.index', $shipping->id); ?>" class="btn btn-warning">Beri Penilaian</a>
                                     <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
-                                </div>
-                            <?php else: ?>
-                                <div class="card-header-action text-right">
+                                <?php else: ?>
                                     <a href="<?= route_to('member.shippings.timeline', $shipping->id); ?>" class="btn btn-info">Lihat</a>
                                     <button data-url="<?= route_to('member.shippings.finish', $shipping->id); ?>" data-target="#finishModal" data-toggle="modal" class="btn btn-success btn-finish">Selesaikan Pesanan</button>
                                     <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
-                                </div>
-                            <?php endif; ?>
-                        <?php else: ?>
-                            <div class="card-header-action text-right">
+                                <?php endif; ?>
+                            <?php else: ?>
                                 <a href="<?= route_to('member.payments.edit', $shipping->id); ?>" class="btn btn-info">Bayar</a>
                                 <a href="<?= route_to('member.payments.nota', $shipping->id); ?>" class="btn btn-dark"><i class="fa fa-print"></i></a>
-                            </div>
+                            <?php endif; ?>
                         <?php endif; ?>
-                    <?php endif; ?>
+                    </div>
                 </div>
                 <div class="card-body">
                     <?php foreach ($products as $product): ?>
@@ -145,12 +138,38 @@
             </form>
         </div>
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="notificationModal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form class="modal-content" id="form-notification" method="post" action="">
+                <?= csrf_field(); ?>
+                <input type="hidden" name="_method" value="put">
+                <div class="modal-header">
+                    <h5 class="modal-title">Matikan Notifikasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Yakin ingin matikan notifikasi?</p>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-success">Ya</button>
+                </div>
+            </form>
+        </div>
+    </div>
 <?= $this->endSection() ?>
 
 <?= $this->section('content-script') ?>
     <script>
         $(".btn-finish").on('click', function () {
             $('#form-finish').attr("action", $(this).data('url'));
+        })
+
+        $(".notification-button").on('click', function () {
+            $('#form-notification').attr("action", $(this).data('url'));
         })
     </script>
 <?= $this->endSection() ?>

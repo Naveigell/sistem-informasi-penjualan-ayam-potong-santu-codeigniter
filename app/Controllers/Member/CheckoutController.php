@@ -81,13 +81,14 @@ class CheckoutController extends BaseController
 
         try {
             $shipping->insert(array_merge($this->request->getVar(), [
-                "user_id"  => session()->get('user')->id,
-                "area_id"  => $this->request->getVar('area_id'),
-                "order_id" => uniqid(),
-                "status"   => $this->request->getVar('payment_option') == 'cod' ? Shipping::STATUS_ON_PROGRESS : Shipping::STATUS_WAITING_PAYMENT,
-                "total"    => $total,
+                "user_id"       => session()->get('user')->id,
+                "area_id"       => $this->request->getVar('area_id'),
+                "order_id"      => uniqid(),
+                "status"        => $this->request->getVar('payment_option') == 'cod' ? Shipping::STATUS_ON_PROGRESS : Shipping::STATUS_WAITING_PAYMENT,
+                "total"         => $total,
 //                "weight"   => $weight,
-                "weight"   => 0,
+                "weight"        => 0,
+                "user_has_read" => 1,
             ]));
 
             $data = array_map(function ($cart) use ($shipping) {
