@@ -41,8 +41,8 @@
             </a>
             <p>Usaha ayam potong santu merupakan salah satu Usaha yang bergerak dibidang penjualan ayam potong di daerah Ubud, Gianyar, Bali.</p>
             <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Jln Raya Ubud, No. 35 Kecamatan Ubud, Kabupaten Gianyar.</p>
-            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>santuriani12@gmail.com</p>
+            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+6281239682074</p>
         </div>
     </div>
 </div>
