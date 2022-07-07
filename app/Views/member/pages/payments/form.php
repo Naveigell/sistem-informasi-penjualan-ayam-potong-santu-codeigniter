@@ -116,8 +116,7 @@
                             <label>Bank Dituju</label>
                             <select name="merchant_bank" class="custom-select">
                                 <option value="">-- Nothing Selected --</option>
-                                <option value="bri">18399848 [BRI]</option>
-                                <option value="bca">3949859391 [BCA]</option>
+                                <option value="bri">0590-01-025388-50-9 [BRI]</option>
                             </select>
                         </div>
                         <div class="col-md-6 form-group">

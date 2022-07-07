@@ -40,8 +40,8 @@
                                     <?php continue; ?>
                                 <?php endif; ?>
 
-                                <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?>">
-                                    <video controls width="100%" height="100%" style="cursor: pointer;">
+                                <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?> carousel-index-<?= $index; ?>">
+                                    <video id="vid" controls width="100%" height="100%" style="cursor: pointer;">
                                         <source src="<?= base_url('/uploads/videos/products/' . $media->media); ?>" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
@@ -49,17 +49,17 @@
 
                             <?php else: ?>
 
-                                <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?>">
+                                <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?> carousel-index-<?= $index; ?>">
                                     <img class="w-100 h-100" src="<?= base_url('/uploads/images/products/' . $media->media); ?>" alt="Image">
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                        <i class="fa fa-2x fa-angle-left text-dark"></i>
+                        <i class="fa fa-2x fa-angle-left text-white"></i>
                     </a>
                     <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                        <i class="fa fa-2x fa-angle-right text-dark"></i>
+                        <i class="fa fa-2x fa-angle-right text-white"></i>
                     </a>
                 </div>
             </div>
@@ -247,5 +247,26 @@
         function animateVariantContainer() {
             $('#variant-container').addClass(['animate__animated', 'animate__shakeX']);
         }
+    </script>
+
+    <script>
+        var isPlaying = false;
+        var video = document.getElementById("vid");
+
+        video.addEventListener('click', function () {
+            isPlaying = !isPlaying;
+        })
+
+        $('#product-carousel').on('slid.bs.carousel', function (item) {
+            if ($(item.currentTarget).find("div").find('.active').find('#vid').length > 0) {
+
+                if (!isPlaying)
+                    return;
+
+                video.play();
+            } else {
+                video.pause();
+            }
+        })
     </script>
 <?= $this->endSection() ?>
