@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/admin/admin') ?>
 
 <?= $this->section('content-title') ?>
-    Harga Antar
+    Kategori Produk
 <?= $this->endSection() ?>
 
 <?= $this->section('content-body') ?>
@@ -13,7 +13,7 @@
                 <input type="hidden" name="_method" value="put">
             <?php endif; ?>
             <div class="card-header">
-                <h4>Form Area</h4>
+                <h4>Form Kategori Produk</h4>
             </div>
             <div class="card-body">
                 <?php if ($errors = session()->getFlashdata('errors')): ?>
