@@ -70,7 +70,7 @@ $totalCapital = 0;
             <td style="text-align: center;" colspan="5" width="485" id="caption"><?= shop_information()['shop_name']; ?></td>
         </tr>
         <tr>
-            <td style="text-align: center;" colspan="5">Laporan Keuangan <?= shop_information()['shop_name']; ?></td>
+            <td style="text-align: center;" colspan="5">Laporan Laba Rugi <?= shop_information()['shop_name']; ?></td>
         </tr>
         <tr>
             <td></td>

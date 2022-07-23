@@ -55,10 +55,10 @@
     <table border="0" cellpadding="0" cellspacing="0" width="485" class="border" style="overflow-x:auto;">
         <thead>
         <tr>
-            <td colspan="4" width="485" id="caption"><?= shop_information()['shop_name']; ?></td>
+            <td colspan="5" width="485" id="caption"><?= shop_information()['shop_name']; ?></td>
         </tr>
         <tr>
-            <td colspan="4">Laporan Keuangan <?= shop_information()['shop_name']; ?></td>
+            <td colspan="5">Laporan Pemasukan <?= shop_information()['shop_name']; ?></td>
         </tr>
         <tr>
             <td></td>

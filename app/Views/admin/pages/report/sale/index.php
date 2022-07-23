@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/admin/admin') ?>
 
 <?= $this->section('content-title') ?>
-    Laporan Penjualan
+    Laporan Pemasukan
 <?= $this->endSection() ?>
 
 <?= $this->section('content-body') ?>
@@ -61,7 +61,7 @@
                             </tr>
                         <?php endforeach; ?>
                         <tr style="border-top: 1px solid #f5f3f3;">
-                            <td><b>Total Penjualan</b></td>
+                            <td><b>Total Pemasukan</b></td>
                             <td></td>
                             <td></td>
                             <td></td>
