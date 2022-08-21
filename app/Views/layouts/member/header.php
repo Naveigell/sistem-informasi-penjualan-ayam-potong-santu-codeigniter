@@ -54,10 +54,10 @@
                     <i class="fa fa-sign-in-alt text-primary"></i>
                     <span class="badge">Login</span>
                 </a>
-<!--                <a href="--><?//= route_to('member.auth.register.index'); ?><!--" class="btn border">-->
-<!--                    <i class="fa fa-door-open text-primary"></i>-->
-<!--                    <span class="badge">Register</span>-->
-<!--                </a>-->
+                <a href="<?= route_to('auth.password.email.index'); ?>" class="btn border">
+                    <i class="fa fa-key text-primary"></i>
+                    <span class="badge">Forget Password</span>
+                </a>
             <?php endif; ?>
         </div>
     </div>
