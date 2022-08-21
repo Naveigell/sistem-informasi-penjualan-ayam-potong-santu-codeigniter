@@ -31,9 +31,13 @@
                         <div class="control-group">
                             <input type="password" class="form-control" name="password" placeholder="Your Password" data-validation-required-message="Please enter your email">
                             <p class="help-block text-danger"></p>
+                            <a href="<?= route_to('auth.password.email.index'); ?>" class="btn btn-link d-inline-block" style="float: left;">Lupa password</a>
+                            <div class="" style="clear: both;"></div>
                         </div>
                         <div>
                             <button class="btn btn-primary py-2 px-4" type="submit">Login</button>
+                            <br>
+                            <br>
                         </div>
                     </form>
                 </div>
